@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--CDN A AJOUTER SUR TOUTES LES PAGES-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!--AMELIORATION SEO-->
+    <!--Titre-->
+    <title>Contactez-nous - Demande de devis, demande de partenariats ou Informations sur votre traiteur Vite & Gourmand
+    </title>
+    <!--description-->
+    <meta name="description"
+        content="Contactez l'équipe de Vite & Gourmand pour vos commandes sur Bordeaux et ses environs. Demandez un devis, un partenariat ou planifiez votre évènement.">
+    <!--Mots clés-->
+    <meta name="keywords"
+        content="contact, traiteur à Bordeaux, commande, demande devis, évènementiel, demande partenariat.">
+
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="images/icons/FAVICON vite & Gourmand.ico">
+
+    <!--BOOSTRAP CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- CSS-->
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+    <div id="header"></div>
+    <!-- le contenu du header.html sera inséré ici -->
+
+
+    <main>
+
+        <!-- SECTION HERO -->
+
+        <section class="hero-image-nouscontacter"></section>
+
+        <div class="contact-texte-intro">
+            <h1>Nous contacter:</h1>
+            <p>Une question, une suggestion ou une collaboration? Envoyez-nous un message!</p>
+
+            <div class="contact-form-container">
+
+                <!--FORMULAIRE CONTACT réalisé avec BOOSTRAP-->
+
+                <div class="mb-3">
+                    <label for="formulairecontact" class="form-label">Nom:</label>
+                    <input type="nom" class="form-control" id="formulairecontactnom" placeholder="DUPONT">
+                </div>
+                <div class="mb-3">
+                    <label for="formulairecontact" class="form-label">Prénom:</label>
+                    <input type="prenom" class="form-control" id="formulairecontactprenom" placeholder="Guillaume">
+                </div>
+                <div class="mb-3">
+                    <label for="formulairecontact" class="form-label">Adresse mail:</label>
+                    <input type="email" class="form-control" id="formulairecontactmail"
+                        placeholder="dupont.g@gmail.com">
+                </div>
+                <div class="mb-3">
+                    <label for="formulairecontact" class="form-label">Sujet::</label>
+                    <input type="sujet" class="form-control" id="formulairecontactsujet" placeholder="Demande de devis">
+                </div>
+                <div class=" mb-3">
+                    <label for="formulairecontact" class="form-label">Message:</label>
+                    <textarea class="form-control" id="formulairecontactmessage" rows="3"></textarea>
+                </div>
+
+                <!--Bouton alerte ENVOYER créé avec BOOSTRAP et personnalisé-->
+
+                <div class="contact-form-container">
+                    <div class="alert d-none" role="alert" id="alerteContactMessage"></div>
+
+                    <div class="text-center mt-4 mb-3">
+                        <button type="button" class="bouton-envoyer" id="liveAlertBtn">Envoyer</button>
+                    </div>
+                </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div id="footer"></div>
+    <!-- le contenu du footer.html sera inséré ici -->
+
+    <script src="./JS/style.js"></script>
+    <!-- lien JS pour HEADER & FOOTER DRY-->
+    <script src="./JS/dry-injector.js"></script>
+
+</body>
+
+</html>

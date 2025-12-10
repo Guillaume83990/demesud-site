@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--CDN A AJOUTER SUR TOUTES LES PAGES-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!--AMELIORATION SEO-->
+    <!--Titre-->
+    <title>Connexion à votre compte - Vite & Gourmand - saveurs rapides et fraîches</title>
+    <!--description-->
+    <meta name="description"
+        content="Connectez-vous à votre compte ou créez un nouveau compte Vite & Gourmand pour retrouver vos commandes et profiter d'une expérience rapide et savoureuse.">
+    <!--Mots clés-->
+    <meta name="keywords" content="connexion, compte client, commandes, livraisons rapides.">
+
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="images/icons/FAVICON vite & Gourmand.ico">
+
+    <!--BOOSTRAP CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- CSS-->
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+    <div id="header"></div>
+    <!-- le contenu du header.html sera inséré ici -->
+
+
+    <main>
+
+        <!--SECTION HERO-->
+
+        <section class="hero-image-connection"></section>
+
+        <div class="login-box">
+            <h1>Connexion à votre compte</h1>
+
+            <div class="conection-form-container">
+
+                <!-- FORMULAIRE DE CONNEXION réalisé BOOSTRAP -->
+
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Adresse mail:</label>
+                    <input type="email" class="form-control" id="exampleFormControlInput1"
+                        placeholder="dupont.g@gmail.com">
+                </div>
+
+                <div class="mb-3">
+                    <label for="inputPassword6" class="form-label">Mot de passe</label>
+                    <input type="password" id="inputPassword6" class="form-control"
+                        aria-describedby="passwordHelpInline">
+                </div>
+                <span id="passwordHelpInline" class="form-text">
+                    Doit comporter au minimum 10 caractères dont: <br> ( 1 caractère spécifique, 1 majuscule, 1
+                    minuscule
+                    et 1
+                    chiffre).
+                </span>
+            </div>
+        </div>
+        </div>
+
+        <!--BOUTON MDP OUBLIE realisé BOOSTRAP-->
+
+        <form id="connectionform">
+
+            <div class="text-center mt-0 mb-3">
+                <button type="button" class="mdp-oublie" id="mdpoublieBtn">Mot de passe oublié</button>
+            </div>
+
+            <div class="alert d-none" role="alert" id="mdpAlerteMessage">
+            </div>
+        </form>
+
+        <!--BOUTON SE CONNECTER-->
+
+        <form id="seconnecterform">
+            <div id="liveAlerteSeconnecter"></div>
+            <div class="text-center mt-5 mb-3">
+                <button type="submit" class="bouton-seconnecter" id="seconnecterBtn">Se connecter</button>
+            </div>
+        </form>
+
+        <!--BOUTON CREER un COMPTE-->
+
+        <form id="creercompteform" action="creeruncompte.html">
+            <div id="liveAlertcreercompte"></div>
+            <div class="text-center mt-3 mb-3">
+                <button type="submit" class="bouton-creer" id="creercomptetBtn">Créer un compte</button>
+            </div>
+        </form>
+
+    </main>
+
+    <div id="footer"></div>
+    <!-- le contenu du footer.html sera inséré ici -->
+
+    <script src="./JS/style.js"></script>
+    <!-- lien JS pour HEADER & FOOTER DRY-->
+    <script src="./JS/dry-injector.js"></script>
+
+</body>
+
+</html>

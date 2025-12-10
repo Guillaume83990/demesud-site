@@ -1,0 +1,49 @@
+/* --- Styles pour le Bouton Flottant (l'icône d'ouverture du chat) --- */
+.bpw-floating-button {
+    /* Utilisation de la couleur d'accentuation  */
+    background-color: #6D2323 !important;
+}
+
+/* --- Styles pour l'En-tête du Chat --- */
+.bpw-header-container {
+    background-color: #D9D9D9 !important;
+}
+
+/* Le texte dans l'en-tête doit rester noir (Mr Croque Assistant...) */
+.bpw-header-text {
+    color: #000000 !important;
+}
+
+/* --- Styles pour l'Arrière-Plan de la Fenêtre de Chat --- */
+.bpw-chat-container {
+    background-color: #F7F7DF !important;
+}
+
+/* --- Styles pour les Bulles de message du BOT (Monsieur Croque) --- */
+.bpw-chat-bubble[data-from="bot"] {
+    /* Utilisation du Gris Clair pour la bulle */
+    background-color: #D9D9D9 !important;
+    /* Texte du bot en noir */
+    color: #000000 !important;
+    /* Coins arrondis */
+    border-radius: 15px 15px 15px 0 !important;
+    /* Taille de la police */
+    font-size: 14px !important;
+}
+
+/* --- Styles pour les Bulles de message de l'UTILISATEUR --- */
+.bpw-chat-bubble[data-from="user"] {
+    /* Utilisation de la couleur d'accentuation pour les messages de l'utilisateur */
+    background-color: #6D2323 !important;
+    /* Texte de l'utilisateur en blanc pour le contraste  */
+    color: #FFFFFF !important;
+    /* Coins arrondis */
+    border-radius: 15px 15px 0 15px !important;
+    font-size: 14px !important;
+}
+
+/* --- Styles pour l'heure/date des messages --- */
+.bpw-message-timestamp {
+    /* Le timestamp */
+    color: #666666 !important;
+}

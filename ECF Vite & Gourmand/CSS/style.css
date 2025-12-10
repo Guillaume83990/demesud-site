@@ -1,0 +1,916 @@
+/*-----------------------------------------------------------------------------------------
+*/
+/* 0. BASE COMMUNE & FONDATIONS
+*/
+/*-----------------------------------------------------------------------------------------
+*/
+body {
+    background-color: #F7F7DF !important;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    display: block;
+    overflow: auto;
+    position: relative;
+}
+
+a {
+    color: black;
+}
+
+/* --- HEADER --- */
+
+.navbar {
+    transition: all 0.3s ease;
+    background-color: #D9D9D9 !important;
+    padding-top: 0px;
+    /* réduit espace au-dessus */
+    padding-bottom: 0px;
+    /* réduit espace en -dessous */
+}
+
+/* Agrandir le logo */
+.navbar-logo {
+    height: 100px;
+    /* augmente la taille ici */
+    width: auto;
+    transition: transform 0.2s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.05);
+}
+
+.nav-link {
+    font-weight: 500;
+    /* augmenter l'épaisseur de la police */
+    color: #333 !important;
+}
+
+.nav-link:hover {
+    color: #d9534f !important;
+    /* Couleur au survol */
+}
+
+.nav-link.active {
+    color: #d9534f !important;
+    /* couleur active */
+    font-weight: 600;
+}
+
+/* FOOTER */
+footer {
+    background-color: #D9D9D9;
+    color: black;
+    padding: 30px 0 10px 0;
+    /* padding en haut et en bas */
+    width: 100%;
+    margin-top: 50px;
+    /* espace avec contenu principal */
+}
+
+/* suppression des puces pour liste informations légales */
+.footer-legal ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 5px;
+}
+
+/* conteneur flex pour colonnes */
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    /* permet aux elements de passer ligne sur mobile */
+    justify-content: space-evenly;
+    /* distribue espace entre blocs */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+    text-align: center;
+    /* centrage blocs sur mobile */
+    height: 260px;
+}
+
+/*style des blocs d'information */
+.footer-content>div {
+    flex-basis: 25%;
+    /* chaque colonne prend 25% espace sur desktop */
+    padding: 20px;
+    min-width: 200px;
+    /* minimum pour pas avoir colonnes étroites */
+}
+
+.footer-content h4 {
+    color: #7a2d2d;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.footer-content p,
+.footer-content li {
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+/* copyright */
+.footer-copyright {
+    text-align: center;
+    padding-top: 20px;
+    margin-top: 20px;
+    border-top: 1px solid #444;
+    /* ligne de séparation */
+    font-size: 0.8em;
+}
+
+/* logo à ajuster pour la taille */
+.footer-logo img {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.footer-social a:hover {
+    color: #ffd966;
+}
+
+/* Footer media query */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        /* les colonnes s'empilent */
+        align-items: center;
+        /* centrage des éléments empilés */
+    }
+
+    .footer-content>div {
+        flex-basis: 100%;
+        /* chaque bloc prend toute la largeur */
+        margin-bottom: 20px;
+    }
+}
+
+
+/* Styles généraux pour le body, les liens, les titres (h1, h2...) */
+/* styles pour les éléments de navigation (header, footer)*/
+
+/*-----------------------------------------------------------------------------------------
+*/
+/* 1. COMPOSANTS GENERIQUES REUTILISABLES
+*/
+/*-----------------------------------------------------------------------------------------
+*/
+
+/* styles des boutons, des cartes (si elles sont sur plusieurs pages ...) */
+
+/*-----------------------------------------------------------------------------------------
+*/
+/* 2. PAGE MENTIONS LEGALES ET CGU / CGV (mentions-legales.html) et (cgu-cgv.html)
+*/
+/* ----------------------------------------------------------------------------------------
+*/
+
+/* STYLE PAGE LEGALE (mentions légales et CGU-CGV) */
+.legal-content {
+    max-width: 900px;
+    /* limite la largeur */
+    margin: 50px auto;
+    /* centre le contenu horizontalement */
+    padding: 0 20px;
+}
+
+.legal-content h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.8em;
+    color: #333;
+    /* couleur texte principal */
+}
+
+.legal-content h2 {
+    color: #7a2d2d;
+    font-size: 1.6em;
+    border-bottom: 2px solid #7a2d2d;
+    /* souligne la section */
+    padding-bottom: 40px;
+    margin-bottom: 15px;
+}
+
+.legal-content p {
+    line-height: 1.8;
+    /* espacement entre les lignes */
+    margin-bottom: 15px;
+}
+
+/* style spécifique pour les adresses et informations importantes */
+.legal-section p strong {
+    font-weight: 600;
+}
+
+/* Appliquer un padding en haut du contenu pour pousser texte sous header */
+main {
+    padding-top: 120px;
+    /* à ajuster selon besoin en fonction taille header */
+}
+
+/*-----------------------------------------------------------------------------------------
+*/
+/* 3. PAGE INTRODUCTION (intro.html)
+*/
+/* ----------------------------------------------------------------------------------------
+*/
+/* style page introduction*/
+.main-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    z-index: 10;
+    max-width: 90%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Logo */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 260px;
+    height: 260px;
+    background-color: white;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 15px auto;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* Slogan */
+.slogan {
+    font-size: 1.5em;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Bouton */
+.bouton-entrer {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: rgb(75, 72, 69);
+    color: white;
+    text-decoration: none;
+    border-radius: 40px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.icon-entrer {
+    /* A modifier selon besoin pour déplacer couverts */
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.slogan-wrapper {
+    padding: 5px 15px;
+    margin: 10px 0;
+    max-width: fit-content;
+    border-radius: 5px;
+}
+
+.bouton-entrer:hover {
+    background-color: #6D2323;
+}
+
+
+/* Animation slogan */
+.slogan span {
+    display: inline-block;
+    white-space: nowrap;
+    opacity: 0;
+}
+
+/* Partie gauche */
+.slogan-left {
+    transform: translateX(-100%);
+    /* départ à gauche */
+    animation: slideFromLeft 1s forwards;
+}
+
+/* Partie droite */
+.slogan-right {
+    transform: translateX(100%);
+    /*départ à droite */
+    animation: slideFromRight 1s forwards;
+    animation-delay: 0.3s;
+    /* délai pour synchroniser avec la partie gauche */
+}
+
+/* Keyframes */
+@keyframes slideFromLeft {
+    to {
+        transform: translateX(0);
+        /* position fianle */
+        opacity: 1;
+    }
+}
+
+@keyframes slideFromRight {
+    to {
+        transform: translateX(0);
+        /* position fianle */
+        opacity: 1;
+    }
+}
+
+/* arriere plan intro */
+.intro-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url('../images/backgrounds/image\ intro.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    /* derrière le contenu */
+}
+
+/* Couche sombre */
+.intro-background::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    /* couche sombre */
+    z-index: -1;
+    /* derrière le contenu */
+}
+
+/*Media query */
+
+/* Tablette */
+@media (max-width: 1024px) {
+    .logo-container {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto 20px auto;
+    }
+
+    .slogan {
+        font-size: 1.3em;
+    }
+
+    .bouton-entrer {
+        padding: 12px 25px;
+    }
+}
+
+/* Smartphone */
+@media (max-width: 768px) {
+    .logo-container {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 15px auto;
+    }
+
+    .bouton-entrer {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+}
+
+/* Section hero */
+.hero {
+    min-height: 100vh;
+    /* occupe toute la hauteur de la fenêtre */
+    width: 100vw;
+    /* occupe toute la largeur de la fenêtre */
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+        url('../images/backgrounds/hero\ vite\ &\ gourmand.png') center/cover no-repeat;
+    /* image de fond avec une couche sombre pour lisibilité */
+
+    background-size: cover;
+    /* couvre toute la section */
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+/*-----------------------------------------------------------------------------------------
+*/
+/* 3. PAGE ACCUEIL (index.html)
+*/
+/* ----------------------------------------------------------------------------------------
+*/
+
+/* Texte effet machine à écrire */
+.typewriter {
+    overflow: hidden;
+    /* cache le texte avant d'écrire */
+    white-space: nowrap;
+    /* empêche texte de passer à la ligne */
+    width: 0;
+    border-right: .15em solid white;
+    /* CURSEUR */
+    font-family: 'Courier New', Courier, monospace;
+    /* style machine à écrire */
+    font-size: 1.5em;
+    /*taille du texte */
+    margin: 0;
+    animation: typing 3.5s steps(49, end);
+    /* durée et étape de l'animation */
+    animation-fill-mode: forwards;
+    /* garde le texte affiché après animation */
+}
+
+/* Keyframes animation machine à écrire */
+@keyframes typing {
+    from {
+        width: 0;
+        /* début animation */
+    }
+
+    to {
+        width: 100%;
+        /* fin animation */
+    }
+}
+
+/* Section notre entreprise */
+.notre-entreprise {
+    padding: 60px 5%;
+    text-align: center;
+}
+
+.notre-entreprise h2 {
+    font-size: 2.5em;
+    margin-bottom: 30px;
+}
+
+.contenu-entreprise {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.texte-entreprise {
+    flex: 3;
+    text-align: left;
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.images-entreprise {
+    flex: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.images-entreprise img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Section notre équipe */
+.notre-equipe {
+    padding: 60px 5%;
+    text-align: center;
+    background-color: #FFFFFF;
+    /* pour creer un détachement avec section précédente */
+}
+
+.section-title {
+    font-size: 2.5em;
+    margin-bottom: 50px;
+    color: #333;
+}
+
+.membre-equipe {
+    max-width: 800px;
+    /* limite largeur */
+    margin: 60px auto;
+    text-align: center;
+}
+
+.portrait-equipe {
+    margin: 0 auto 10px auto;
+    width: 100%;
+    min-width: 150px;
+    overflow: hidden;
+}
+
+.portrait-equipe img {
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+    /* arrondissement bords */
+    object-fit: cover;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.description-equipe {
+    padding: 20px;
+    text-align: center;
+}
+
+.description-equipe h3 {
+    font-size: 2em;
+    color: #6D2323;
+    margin-bottom: 10px;
+}
+
+.description-equipe p {
+    line-height: 1.6;
+    margin: 0 auto 15px auto;
+    max-width: 700px;
+}
+
+/* Section globale */
+.client-reviews {
+    background-color: #7a2d2d;
+    /* rouge bordeaux  */
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.client-reviews h2 {
+    color: #fff;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+/* Grille responsive */
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Cartes d'avis */
+.review-card {
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    padding: 25px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+    /* Donner un léger effet de rebond au survol */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Bloc photo + nom */
+.reviewer-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.reviewer-info img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    /* Pour que image soit ronde */
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 3px solid #7a2d2d;
+}
+
+.reviewer-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Étoiles */
+.stars {
+    color: #f5b301;
+    /* or doré */
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+/* Texte de l'avis */
+.review-text {
+    font-style: italic;
+    color: #444;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+/* RESPONSIVE */
+@media (max-width:900px) {
+    .contenu-entreprise {
+        flex-direction: column;
+    }
+
+    .texte-entreprise .images-entreprise {
+        flex: auto;
+    }
+
+    .texte-entreprise {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .membre-equipe,
+    .membre-equipe.jose {
+        flex-direction: column;
+        /* les elements passent en verticale */
+        text-align: center;
+    }
+
+    .portrait-equipe {
+        order: -1;
+        /* place photo au-dessus de la description */
+    }
+
+    .membre-equipe.jose .portrait-equipe {
+        /* pour le responsive, la photo jose doit rester au-dessus texte */
+        order: -1;
+    }
+}
+
+/* MEDIA QUERY TABLETTE (ex: 2 colonnes) */
+@media (max-width: 992px) {
+    .reviews-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* MEDIA QUERY MOBILE (ex: 1 colonne ) */
+@media (max-width: 600px) {
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/*-----------------------------------------------------------------------------------------
+*/
+/* 4. PAGE NOS MENUS (nosmenus.html)
+*/
+/* ----------------------------------------------------------------------------------------
+*/
+
+
+
+
+
+/*-----------------------------------------------------------------------------------------
+*/
+/* 5. PAGE NOS SERVICES (nosservices.html)
+*/
+/* ----------------------------------------------------------------------------------------
+*/
+.conteneur {
+    text-align: center;
+    list-style: none;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    background-color: #F7F7DF;
+    padding: 20px;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.services-grid article {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* aligne contenu en haut */
+    align-items: center;
+    border: 1px solid #6D2323;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    background-color: #F7F7DF;
+    /* fond blanc pour articles */
+    transition: all 0.3s ease;
+    /* effet de survol */
+    height: 100%;
+    /* tous les articles aient la meme hauteur */
+    text-align: center;
+}
+
+.services-grid article img {
+    width: 100%;
+    max-width: 300px;
+    /* limite largeur */
+    height: 200px;
+    /* hauteur unique pour toutes images */
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    /* espace sous image */
+}
+
+/* style titre articles */
+.services-grid article h3 {
+    font-size: 1.3em;
+    color: #7a2d2d;
+    margin-top: 0;
+    margin-bottom: 10px;
+    /* espace sous titre */
+}
+
+/* style pour les listes */
+.servicesgrid article ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 15px;
+    /* espace sous liste */
+    text-align: left;
+    width: 100%;
+    max-width: 250px;
+}
+
+.services-grid article ul li {
+    margin-bottom: 5px;
+    color: #555;
+    line-height: 1.4;
+}
+
+
+/* Media queries */
+
+/* tablettes */
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+        /* passe sur 1 colonne */
+        gap: 20px;
+    }
+
+    .services-grid article {
+        width: 100%;
+        margin-bottom: 0;
+    }
+}
+
+/* pour smartphones */
+@media (max-width: 480px) {
+    .services-grid {
+        gap: 15px;
+    }
+
+    .services-grid article {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+}
+
+/*-----------------------------------------------------------------------------------------
+*/
+/* 6. PAGE NOS PARTENAIRES (nospartenaires.html)
+*/
+/* ----------------------------------------------------------------------------------------
+*/
+
+/* styles généraux */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+/* style pour le contenu principal de toutes les sections */
+.container {
+    max-width: 1200px;
+    /* largeur max du contenu */
+    margin: 0 auto;
+    /* centre conteneur horizontalement */
+    padding: 0 15px;
+}
+
+/* section héro page nos partenaires */
+.hero-section {
+    background-image: url(../images/backgrounds/image\ hero\ nos\ partenaires.jpg);
+    background-size: cover;
+    /* image couvre toute la section */
+    background-position: center;
+    /* centre image */
+    color: white;
+    /* texte blanc sur l'image de fond */
+    text-align: center;
+    /* centrer le texte */
+    padding: 100px 0;
+    margin-top: 56px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* petite ombre */
+}
+
+.hero-section h1 {
+    font-size: 2.5em;
+    /* taille titre principal */
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+hero-section h1 strong {
+    color: #ffcc00;
+    /* exemple couleur texte en gras h1 */
+}
+
+.hero-section p {
+    font-size: 1.2em;
+    max-width: 800px;
+    /* limite largeur du paragraphe */
+    margin: 0 auto;
+}
+
+/* Section liste des partenaies */
+.liste-partenaires {
+    padding: 50px 0;
+}
+
+.fiche-partenaire {
+    display: flex;
+    /* permet images et details etre a coté */
+    align-items: center;
+    margin-bottom: 40px;
+    /* espacement entre chaque fiche partenaires */
+}
+
+.fiche-partenaire .media-partenaire {
+    flex: 0 0 200px;
+    /* image prend largeur de 200px*/
+    margin-right: 30px;
+    border-radius: 8px;
+    overflow: hidden;
+    /* cache ce qui dépasse */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* ombre légère */
+}
+
+.fiche-partenaire .media-partenaire img {
+    width: 100%;
+    /* image prend toute largeur conteneur */
+    height: auto;
+    display: block;
+    /* supprime espace sous image */
+}
+
+.fiche-partenaire .details-partenaire {
+    flex: 1;
+    /* le texte prend espace qui reste */
+}
+
+.fiche-partenaire h2 {
+    font-size: 1.8em;
+    margin-bottom: 10px;
+}
+
+.fiche-partenaire p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+/* ligne de séparation */
+hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 40px 0;
+}

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--CDN A AJOUTER SUR TOUTES LES PAGES-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!--AMELIORATION SEO-->
+    <!--Titre-->
+    <title>Nos partenaires locaux - Collaborations Artisans - Vite & gourmand traiteur</title>
+    <!--description-->
+    <meta name="description"
+        content="Découvre les artisans et producteurs locaux de confiance qui collaborent avec Vite & Gourmand pour vous offrir des produits frais et responsables.">
+    <!--Mots clés-->
+    <meta name="keywords" content="partenaires traiteur, collaborations locales, artisans Bordeaux, produits frais.">
+
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="images/icons/FAVICON vite & Gourmand.ico">
+
+    <!--BOOSTRAP CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- CSS-->
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+
+    <body class="internal"> <!-- class permet de pousser le contenu avec CSS-->
+
+        <div id="header"></div>
+        <!-- le contenu du header.html sera inséré ici -->
+
+        <h1>Découvrez nos menus gourmands pour toutes les occasions.</h1>
+        <p class="lead">
+            Noël, Pâques, Saint-Valentin, Halloween ou simplement pour tous les jours,
+            nos menus s'adaptent à chaque moment.</p>
+
+        <div class="promo">
+            <div class="badge">🎉</div>
+            <div class="badge-text">
+                <strong>OFFRE PROMOTIONNELLE -10%</strong> — pour les menus à thèmes et les menus du quotidien.
+            </div>
+        </div>
+
+        <h2 class="filter-title">Rechercher un menu</h2>
+        <!-- Conteneur principal des filtres et du bouton -->
+        <div class="filters-container">
+            <!-- FILTRES -->
+            <div class="filters-row">
+
+                <!-- PRIX MAX -->
+                <select id="prixMax" class="filter-field select">
+                    <option value="">Prix maximum</option>
+                    <option value="20">20€</option>
+                    <option value="30">30€</option>
+                    <option value="40">40€</option>
+                    <option value="50">50€</option>
+                </select>
+
+                <!-- FOURCHETTE DE PRIX -->
+                <select id="fourchettePrix" class="filter-field select">
+                    <option value="">Fourchette de prix</option>
+                    <option value="0-25">0 — 25€</option>
+                    <option value="25-35">25 — 35€</option>
+                    <option value="35-45">35 — 45€</option>
+                    <option value="45-9999">> 45€</option>
+                </select>
+
+                <!-- THÈMES -->
+                <select id="theme" class="filter-field select">
+                    <option value="">Thème</option>
+                    <option value="noel">🎄 Noël</option>
+                    <option value="paques">🐰 Pâques</option>
+                    <option value="halloween">🎃 Halloween</option>
+                    <option value="saintvalentin">❤️ Saint-Valentin</option>
+                    <option value="quotidien">🍽️ Au quotidien</option>
+                    <option value="evenements">🥂 Événements</option>
+                </select>
+
+                <!-- RÉGIME -->
+                <select id="regime" class="filter-field select">
+                    <option value="">Régime</option>
+                    <option value="classique">🥩 Classique</option>
+                    <option value="vegetarien">🌿 Végétarien</option>
+                    <option value="vegan">🥕 Végan</option>
+                </select>
+
+                <!-- NOMBRE DE PERSONNES -->
+                <input id="nbPersonnes" type="number" min="1" placeholder="Nombre pers minimum" class="filter-field">
+            </div>
+
+            <!-- BOUTON CENTRÉ -->
+            <button id="resetFilters" class="reset-btn">Réinitialiser les filtres</button>
+        </div>
+
+
+        <!-- VUE GLOBALE DES MENUS -->
+        <main>
+            <!-- MENUS À THÈMES -->
+            <h2 class="section-title">Nos menus à thèmes 🎭</h2>
+            <div id="section-themes" class="menu-grid"></div>
+
+            <!-- MENUS QUOTIDIEN -->
+            <h2 class="section-title">Nos menus du quotidien 🍽️</h2>
+            <div id="section-quotidien" class="menu-grid"></div>
+
+            <!-- MENUS ÉVÉNEMENTS -->
+            <h2 class="section-title">Nos menus événements 🥂</h2>
+            <div id="section-evenements" class="menu-grid"></div>
+        </main>
+
+        <!-- MODAL DÉTAIL (FULLSCREEN) -->
+        <section id="menu-detail" class="detail-modal hidden" aria-hidden="true">
+            <div class="detail-container" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+
+                <!-- Close -->
+                <button id="close-detail" class="close-btn" aria-label="Fermer la fenêtre">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <!-- CARROUSEL FORMAT CARTE -->
+                <div class="carousel-card">
+                    <button id="carousel-prev" class="carousel-arrow" aria-label="Image précédente">&lsaquo;</button>
+
+                    <div class="carousel-viewport">
+                        <img id="carousel-img" src="" alt="Image du plat" class="carousel-image" />
+                        <div id="carousel-indicators" class="carousel-indicators"></div>
+                    </div>
+
+                    <button id="carousel-next" class="carousel-arrow" aria-label="Image suivante">&rsaquo;</button>
+                </div>
+
+
+                <!-- TITRE / DESCRIPTION -->
+                <h2 id="detail-title"></h2>
+                <p id="detail-description"></p>
+
+                <!-- VERSIONS -->
+                <div id="detail-versions" class="version-list"></div>
+
+                <!-- MENU COMPLET -->
+                <h3>Menu complet</h3>
+                <ul id="detail-menu" class="detail-menu">
+                    <li><strong>Entrée:</strong> <span id="detail-entree"></span></li>
+                    <li><strong>Plat:</strong> <span id="detail-plat"></span></li>
+                    <li><strong>Dessert:</strong> <span id="detail-dessert"></span></li>
+                </ul>
+
+                <!-- ALLERGÈNES -->
+                <h3>Allergènes</h3>
+                <ul id="detail-allergenes" class="allergen-list"></ul>
+
+                <!-- CONSIGNES -->
+                <h3>Consignes de conservation</h3>
+                <p id="detail-consignes"></p>
+
+                <!-- INFORMATIONS DYNAMIQUES -->
+                <div id="detail-infos" class="detail-infos"></div>
+
+                <!-- BOUTON COMMANDER  -->
+                <div class="order-btn-wrapper">
+                    <button id="order-btn" class="pill-btn">Commander</button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FOOTER EN DEHORS DU MODAL  -->
+        <div id="footer"></div>
+
+        <!-- SCRIPTS EN DEHORS DU MODAL  -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="./JS/style.js"></script>
+        <script src="./JS/dry-injector.js"></script>
+
+    </body>
+
+</html>

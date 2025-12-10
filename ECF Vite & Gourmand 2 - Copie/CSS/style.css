@@ -1,0 +1,1675 @@
+/*-----------------------------------------------------------------------------------------
+*/
+/* CHATBOT BOTPRESS
+*/
+/*-----------------------------------------------------------------------------------------
+*/
+
+/* 1. Styles par défaut (Desktop / Tablette) */
+#webchat {
+    width: 500px;
+    max-width: 100%;
+}
+
+/* 2. Media Query pour les petits écrans (Mobile) */
+@media (max-width: 600px) {
+    #webchat {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+}
+
+#webchat .bpWebchat {
+    position: unset;
+    width: 100%;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+
+/*-----------------------------------------------------------------------------------------
+*/
+/* 0. BASE COMMUNE & FONDATIONS
+*/
+/*-----------------------------------------------------------------------------------------
+*/
+
+/* ----------------------------------
+    RESET GLOBAL
+---------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+/* ----------------------------------
+    COULEURS ET POLICES GLOBALES
+---------------------------------- */
+body {
+    font-family: "Lato", sans-serif;
+    line-height: 1.6;
+    background-color: #F7F7DF;
+
+}
+
+/* ----------------------------------
+    TITRES
+---------------------------------- */
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+}
+
+h1 {
+    font-size: 2.75rem;
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+}
+
+h4 {
+    font-size: 1.25rem;
+    margin-bottom: 0.6rem;
+}
+
+/* ----------------------------------
+    TEXTE
+---------------------------------- */
+p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    color: #111;
+}
+
+a {
+    color: #6D2323;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+
+
+/* ----------------------------------
+    HEADER
+---------------------------------- */
+
+body.internal {
+    padding-top: 150px;
+}
+
+.navbar {
+    transition: all 0.3s ease;
+    background-color: #D9D9D9;
+    padding-top: 0px;
+    /* réduit espace au-dessus */
+    padding-bottom: 0px;
+    /* réduit espace en -dessous */
+}
+
+/* Agrandir le logo */
+.navbar-logo {
+    height: 100px;
+    /* augmente la taille ici */
+    width: auto;
+    transition: transform 0.2s ease;
+}
+
+.nav-link {
+    font-weight: 500;
+    /* augmenter l'épaisseur de la police */
+    color: #333;
+}
+
+.nav-link:hover {
+    color: #d9534f;
+    /* Couleur au survol */
+}
+
+.nav-link.active {
+    color: #d9534f !important;
+    /* couleur rouge quand on est sur la page web */
+    font-weight: 600;
+}
+
+
+
+/* ----------------------------------
+    FOOTER
+---------------------------------- */
+
+#footer {
+    background-color: #D9D9D9;
+    color: black;
+    padding: 30px 0 10px 0;
+    /* padding en haut et en bas */
+    width: 100%;
+    margin-top: 50px;
+    /* espace avec contenu principal */
+    display: flex;
+    flex-direction: column;
+}
+
+/* suppression des puces pour liste informations légales */
+.footer-legal ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 5px;
+}
+
+/* conteneur flex pour colonnes */
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    /* permet aux elements de passer ligne sur mobile */
+    justify-content: space-evenly;
+    /* distribue espace entre blocs */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+    text-align: center;
+    /* centrage blocs sur mobile */
+    height: auto;
+}
+
+/*style des blocs d'information */
+.footer-content>div {
+    flex-basis: 25%;
+    /* chaque colonne prend 25% espace sur desktop */
+    padding: 20px;
+    min-width: 200px;
+    /* minimum pour pas avoir colonnes étroites */
+}
+
+.footer-content h4 {
+    color: #6D2323;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.footer-content p,
+.footer-content li {
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+/* copyright */
+.footer-copyright {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+    border-top: 1px solid #444;
+    /* ligne de séparation */
+    font-size: 0.8em;
+    align-self: stretch;
+    /* s'assure qu'il s'étire pour prendre toute la largeur de son parent flex */
+}
+
+/* logo à ajuster pour la taille */
+.footer-logo img {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.footer-social a:hover {
+    color: #ffd966;
+}
+
+/* ----------------------------------
+    GRILLE LAYOUT
+---------------------------------- */
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 colonnes desktop */
+    gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr);
+        /* tablette */
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        /* mobile */
+        gap: 1.5rem;
+    }
+}
+
+/* ----------------------------------
+    RESPONSIVE
+---------------------------------- */
+@media (max-width: 1024px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+    }
+
+    main {
+        padding: 1.5rem 1rem;
+    }
+
+    footer {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+}
+
+/*-----------------------------------------------------------------------------------------
+*/
+/* 1. PAGE MENTIONS LEGALES ET CGU / CGV (mentions-legales.html) et (cgu-cgv.html)
+*/
+/* ----------------------------------------------------------------------------------------
+*/
+
+/* STYLE PAGE LEGALE (mentions légales et CGU-CGV) */
+.legal-content {
+    max-width: 900px;
+    /* limite la largeur */
+    margin: 50px auto;
+    /* centre le contenu horizontalement */
+    padding: 0 20px;
+}
+
+.legal-content h1 {
+    text-align: center;
+    margin-bottom: 40px;
+
+}
+
+.legal-content h2 {
+    color: #6D2323;
+    border-bottom: 2px solid #6D2323;
+    /* souligne la section */
+    padding-bottom: 40px;
+    margin-bottom: 15px;
+}
+
+.legal-content p {
+    line-height: 1.8;
+    /* espacement entre les lignes */
+    margin-bottom: 15px;
+}
+
+/* style spécifique pour les adresses et informations importantes */
+.legal-section p strong {
+    font-weight: 600;
+}
+
+/* Appliquer un padding en haut du contenu pour pousser texte sous header */
+main {
+    padding-top: 120px;
+    /* à ajuster selon besoin en fonction taille header */
+}
+
+/*-----------------------------------------------------------------------------------------
+*/
+/* 2. PAGE INTRODUCTION (intro.html)
+*/
+/* ----------------------------------------------------------------------------------------
+*/
+
+/* Bulles CANVAS */
+#introCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* place derrière image */
+    z-index: 9;
+    pointer-events: none;
+    /* Permet de cliquer à travers le canvas */
+}
+
+
+
+
+/* style page introduction*/
+.main-content {
+    position: absolute;
+    width: 100%;
+    min-height: 100vh;
+    /* occupe toute la hauteur de l'écran permet centrer sur hauteur */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Logo */
+.logo-container {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* Slogan */
+.slogan {
+    font-size: 1.5em;
+    color: white;
+}
+
+/* Bouton */
+.bouton-entrer {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: white;
+    color: black;
+    text-decoration: none;
+    border-radius: 40px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.icon-entrer {
+    /* A modifier selon besoin pour déplacer couverts */
+    margin-right: 8px;
+    vertical-align: middle;
+    height: 1.2em;
+    vertical-align: middle;
+}
+
+
+.bouton-entrer:hover {
+    background-color: #6D2323;
+    color: white;
+}
+
+
+/* Animation slogan */
+.slogan span {
+    display: inline-block;
+    white-space: nowrap;
+    opacity: 0;
+}
+
+/* Partie gauche */
+.slogan-left {
+    transform: translateX(-100%);
+    /* départ à gauche */
+    animation: slideFromLeft 1s forwards;
+}
+
+/* Partie droite */
+.slogan-right {
+    transform: translateX(100%);
+    /*départ à droite */
+    animation: slideFromRight 1s forwards;
+    animation-delay: 0.3s;
+    /* délai pour synchroniser avec la partie gauche */
+}
+
+/* Keyframes */
+@keyframes slideFromLeft {
+    to {
+        transform: translateX(0);
+        /* position fianle */
+        opacity: 1;
+    }
+}
+
+@keyframes slideFromRight {
+    to {
+        transform: translateX(0);
+        /* position fianle */
+        opacity: 1;
+    }
+}
+
+/* arriere plan intro */
+.intro-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url('../images/backgrounds/image\ intro.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    /* derrière le contenu */
+}
+
+/* Couche sombre */
+.intro-background::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    /* couche sombre */
+    z-index: -1;
+    /* derrière le contenu */
+}
+
+
+/* Section hero */
+.hero {
+    min-height: 100vh;
+    /* occupe toute la hauteur de la fenêtre */
+    width: 100vw;
+    /* occupe toute la largeur de la fenêtre */
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+        url('../images/backgrounds/hero\ vite\ &\ gourmand.png') center/cover no-repeat;
+    /* image de fond avec une couche sombre pour lisibilité */
+
+    background-size: cover;
+    /* couvre toute la section */
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+/*-----------------------------------------------------------------------------------------
+*/
+/* 3. PAGE ACCUEIL (index.html)
+*/
+/* ----------------------------------------------------------------------------------------
+*/
+
+
+/* ===========================
+   HERO SECTION
+=========================== */
+.hero {
+    position: relative;
+    background: url("../images/backgrounds/hero\ vite\ &\ gourmand.png") center/cover no-repeat;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+/* Overlay sombre*/
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Contenu du hero */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+}
+
+/* Titre principal */
+.hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 1.2rem;
+    color: #fff;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Texte machine à écrire */
+.typewriter {
+    overflow: hidden;
+    /* Cache le texte au fur et à mesure qu’il s’écrit */
+    display: inline-block;
+    /* Nécessaire pour que la largeur du texte puisse être animée */
+}
+
+/* -- Texte animé du slogan -- */
+.typewriter-text {
+    display: inline-block;
+    white-space: nowrap;
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    /* Taille de texte responsive (mobile → desktop) */
+    color: #fff;
+    border-right: 0.15em solid #fff;
+    /* Simule le curseur de la machine à écrire */
+    overflow: hidden;
+    width: 0;
+    animation: typing 3s steps(49, end) forwards, blink 0.75s step-end infinite;
+    /* Lancer deux animations : typing (écriture du texte) et blink (clignotement du curseur) */
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+        /* Départ sans texte visible */
+    }
+
+    to {
+        width: 100%;
+        /* Fin : tout le texte affiché */
+    }
+}
+
+/* --Animation blink : fait clignoter le curseur à droite du texte-- */
+@keyframes blink {
+    50% {
+        border-color: transparent;
+        /* Cache le curseur une fois sur deux pour l’effet clignotant */
+    }
+}
+
+
+/* ===========================
+   RESPONSIVE HERO
+=========================== */
+@media (max-width: 768px) {
+    .hero {
+        height: 80vh;
+    }
+
+    .hero h1 {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+    }
+
+    .hero-btn {
+        margin-top: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        height: 70vh;
+        padding: 0 1rem;
+    }
+
+    .typewriter-text {
+        font-size: 1rem;
+        animation: typing 4s steps(49, end), blink 0.75s step-end infinite;
+    }
+}
+
+
+/* ===========================
+   NOTRE ENTREPRISE
+=========================== */
+.notre-entreprise {
+    padding: 60px 5%;
+    text-align: center;
+}
+
+.notre-entreprise h2 {
+    margin-bottom: 30px;
+}
+
+.contenu-entreprise {
+    display: flex;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.texte-entreprise {
+    flex: 3;
+    text-align: left;
+    line-height: 1.6;
+}
+
+.images-entreprise {
+    flex: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.images-entreprise img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* ===========================
+   NOTRE EQUIPE
+=========================== */
+.notre-equipe {
+    padding: 60px 5%;
+    text-align: center;
+    background-color: #FFFFFF;
+    /* pour creer un détachement avec section précédente */
+}
+
+.section-title {
+    margin-bottom: 50px;
+    color: #333;
+}
+
+.membre-equipe {
+    max-width: 800px;
+    /* limite largeur */
+    margin: 60px auto;
+    text-align: center;
+}
+
+.portrait-equipe {
+    margin: 0 auto 10px auto;
+    width: 100%;
+    min-width: 150px;
+    overflow: hidden;
+}
+
+.portrait-equipe img {
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+    /* arrondissement bords */
+    object-fit: cover;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.description-equipe {
+    padding: 20px;
+    text-align: center;
+}
+
+.description-equipe h3 {
+    color: #6D2323;
+    margin-bottom: 10px;
+}
+
+.description-equipe p {
+    line-height: 1.6;
+    margin: 0 auto 15px auto;
+    max-width: 700px;
+}
+
+
+
+/* ===========================
+   AVIS CLIENTS
+=========================== */
+.client-reviews {
+    background-color: #6D2323;
+    /* rouge bordeaux  */
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.client-reviews h2 {
+    color: #fff;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+/* Grille responsive */
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Cartes d'avis */
+.review-card {
+    background-color: #f8f8f8;
+    border-radius: 12px;
+    padding: 25px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+    /* Donner un léger effet de rebond au survol */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Bloc photo + nom */
+.reviewer-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.reviewer-info img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    /* Pour que image soit ronde */
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 3px solid #6D2323;
+}
+
+.reviewer-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* Étoiles */
+.stars {
+    color: black;
+    /* or doré */
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+/* Texte de l'avis */
+.review-text {
+    font-style: italic;
+    color: #444;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+/* RESPONSIVE */
+@media (max-width:900px) {
+    .contenu-entreprise {
+        flex-direction: column;
+    }
+
+    .texte-entreprise .images-entreprise {
+        flex: auto;
+    }
+
+    .texte-entreprise {
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .membre-equipe,
+    .membre-equipe.jose {
+        flex-direction: column;
+        /* les elements passent en verticale */
+        text-align: center;
+    }
+
+    .portrait-equipe {
+        order: -1;
+        /* place photo au-dessus de la description */
+    }
+
+    .membre-equipe.jose .portrait-equipe {
+        /* pour le responsive, la photo jose doit rester au-dessus texte */
+        order: -1;
+    }
+}
+
+/* MEDIA QUERY TABLETTE (ex: 2 colonnes) */
+@media (max-width: 992px) {
+    .reviews-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* MEDIA QUERY MOBILE (ex: 1 colonne ) */
+@media (max-width: 600px) {
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/*-----------------------------------------------------------------------------------------
+*/
+/* 4. PAGE NOS MENUS (nosmenus.html)
+*/
+/* ----------------------------------------------------------------------------------------
+*/
+
+/* FILTRE MENUS */
+
+:root {
+    --gris: #D9D9D9;
+    --rouge: #6D2323;
+    --blanc: #ffffff;
+}
+
+
+.reference {
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+h1 {
+    text-align: center;
+    margin: 15px 0 5px;
+}
+
+.lead {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.promo {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    font-weight: 600;
+    color: var(--rouge);
+    margin-bottom: 25px;
+}
+
+.promo .badge {
+    font-size: 1.4rem;
+}
+
+.filter-title {
+    text-align: center;
+    font-size: 1.3rem;
+    margin: 10px 0 18px;
+}
+
+.filters-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.filter-field {
+    border-radius: 999px;
+    background-color: var(--gris);
+    padding: 10px 18px;
+    border: 2px solid var(--gris);
+    transition: 0.15s;
+    outline: none;
+}
+
+.filter-field:hover,
+.filter-field:focus {
+    border-color: var(--rouge);
+    background-color: var(--rouge);
+    color: #fff;
+    box-shadow: 0 0 10px rgba(109, 35, 35, 0.2);
+}
+
+.filter-field.select {
+    padding-right: 36px;
+    appearance: none;
+}
+
+.info-result {
+    text-align: center;
+    margin-top: 30px;
+    color: #666;
+    font-style: italic;
+}
+
+/* ============================================================
+   STYLES GLOBAUX
+   ============================================================ */
+
+/* ================== GLOBAL ================== */
+.section-title {
+    text-align: center;
+    margin: 50px 0 20px;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ================== GRID CARTES ================== */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 260px);
+    /* largeur fixe */
+    justify-content: center;
+    /* centre toutes les cartes horizontalement */
+    gap: 20px;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+/* ================== CARTE MENU ================== */
+.menu-card {
+    width: 260px;
+    /* largeur fixe */
+    height: 420px;
+    /* hauteur fixe pour toutes les cartes */
+    height: auto;
+    /* permet carte de grandir si contenu trop long */
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    padding-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    transition: transform .2s;
+    margin: 0 auto;
+    /* centre individuellement */
+}
+
+.menu-card:hover {
+    transform: translateY(-5px);
+}
+
+.menu-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.menu-content {
+    padding: 15px 10px;
+    flex: 1;
+    /* permet au contenu de remplir verticalement */
+}
+
+.menu-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #6D2323;
+    /* BORDEAUX */
+}
+
+.menu-title {
+    font-size: 1.3rem;
+    margin: 5px 0;
+}
+
+.menu-info {
+    font-size: 0.9rem;
+    margin: 5px 0;
+}
+
+/* ================== BOUTONS PILLULE ================== */
+.pill-btn {
+    background: #D9D9D9;
+    color: black;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+    transition: 0.25s;
+}
+
+.pill-btn:hover {
+    background: #6D2323;
+    color: white;
+}
+
+/* ================== MODAL FULL SCREEN ================== */
+.detail-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    box-sizing: border-box;
+    z-index: 999999;
+}
+
+.detail-modal.hidden {
+    display: none;
+}
+
+.detail-container {
+    background: white;
+    width: 90%;
+    max-width: 900px;
+    max-height: 90%;
+    overflow-y: auto;
+    border-radius: 20px;
+    padding: 30px;
+    position: relative;
+}
+
+.detail-img {
+    width: 100%;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+/* Bouton fermeture */
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #6D2323;
+    color: white;
+    border: none;
+    font-size: 20px;
+    padding: 8px 12px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Versions */
+.version-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Allergènes */
+.allergen-list {
+    list-style: disc;
+    margin-left: 25px;
+    margin-bottom: 20px;
+}
+
+/* Menu complet (entrée, plat, dessert) */
+#detail-menu {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+}
+
+#detail-menu li {
+    margin: 5px 0;
+}
+
+/* Bouton commander */
+.order-btn {
+    background: #D9D9D9;
+    color: black;
+    border: none;
+    padding: 14px 22px;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 25px;
+}
+
+.order-btn:hover {
+    background: #6D2323;
+    color: white;
+}
+
+/* ================== RESPONSIVE ================== */
+@media (max-width: 900px) {
+    .menu-grid {
+        grid-template-columns: repeat(auto-fit, 220px);
+    }
+
+    .menu-card {
+        width: 220px;
+        height: 380px;
+    }
+
+    .menu-img {
+        height: 140px;
+    }
+}
+
+@media (max-width: 600px) {
+    .menu-grid {
+        grid-template-columns: repeat(auto-fit, 180px);
+    }
+
+    .menu-card {
+        width: 180px;
+        height: 350px;
+    }
+
+    .menu-img {
+        height: 120px;
+    }
+}
+
+
+/*-----------------------------------------------------------------------------------------
+*/
+/* 5. PAGE NOS SERVICES (nosservices.html)
+*/
+/* ----------------------------------------------------------------------------------------
+*/
+.conteneur {
+    text-align: center;
+    list-style: none;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    background-color: #F7F7DF;
+    padding: 20px;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.services-grid article {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    /* aligne contenu en haut */
+    align-items: center;
+    border: 1px solid #6D2323;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    background-color: #F7F7DF;
+    /* fond blanc pour articles */
+    transition: all 0.3s ease;
+    /* effet de survol */
+    height: 100%;
+    /* tous les articles aient la meme hauteur */
+    text-align: center;
+}
+
+.services-grid article img {
+    width: 100%;
+    max-width: 300px;
+    /* limite largeur */
+    height: 200px;
+    /* hauteur unique pour toutes images */
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    /* espace sous image */
+}
+
+/* style titre articles */
+.services-grid article h3 {
+    font-size: 1.3em;
+    color: #6D2323;
+    margin-top: 0;
+    margin-bottom: 10px;
+    /* espace sous titre */
+}
+
+/* style pour les listes */
+.servicesgrid article ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 15px;
+    /* espace sous liste */
+    text-align: left;
+    width: 100%;
+    max-width: 250px;
+}
+
+.services-grid article ul li {
+    margin-bottom: 5px;
+    color: #555;
+    line-height: 1.4;
+}
+
+
+/* Media queries */
+
+/* tablettes */
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+        /* passe sur 1 colonne */
+        gap: 20px;
+    }
+
+    .services-grid article {
+        width: 100%;
+        margin-bottom: 0;
+    }
+}
+
+/* pour smartphones */
+@media (max-width: 480px) {
+    .services-grid {
+        gap: 15px;
+    }
+
+    .services-grid article {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+}
+
+/*-----------------------------------------------------------------------------------------
+*/
+/* 6. PAGE NOS PARTENAIRES (nospartenaires.html)
+*/
+/* ----------------------------------------------------------------------------------------
+*/
+
+/* L'image de la bannière s'étend toute largeur */
+.hero-image-banner img {
+    width: 100%;
+    height: 350PX;
+    object-fit: cover;
+    display: block;
+}
+
+/* Le conteneur du texte */
+.hero-text-content {
+    margin-bottom: 40px;
+    padding: 30px 5%;
+    text-align: center;
+
+}
+
+.fiche-partenaire {
+    /* Flexbox pour aligner l'image et le texte côte à côte */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+
+
+    /* Styles du cadre de la fiche */
+    border: 1px solid #6D2323;
+    padding: 20px;
+    margin-bottom: 20px;
+    max-width: 800px;
+    /* ajuste taille conteneur image et texte */
+    margin: 20px auto;
+    /* centrage horizontale fiche */
+}
+
+/* Pour modifier les images partenaires */
+.partenaire-media img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.histoire-passion {
+    text-align: center;
+    /* Centre tout le texte horizontalement */
+    padding: 60px 20px;
+    background-color: #F7F7DF;
+}
+
+.photos-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    gap: 40px;
+}
+
+.photo {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    /* Centre tout le texte horizontalement */
+    border-radius: 50%;
+    /* Forme ronde */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bouton-contact {
+    display: inline-block;
+    background-color: #6D2323;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.bouton-contact:hover {
+    background-color: #D9D9D9;
+    color: black;
+}
+
+/* MEDIA QUERY : TABLETTE Nos partenaires (Max 992px) */
+
+@media (max-width: 992px) {
+
+    /* --- Liste Partenaires : Passage en colonne --- */
+    .fiche-partenaire {
+        flex-direction: column;
+        /* L'image vient au-dessus du texte */
+        text-align: center;
+    }
+
+    .partenaire-media {
+        flex: 0 0 100%;
+        /* L'image prend toute la largeur */
+    }
+
+    .partenaire-media img {
+        height: 200px;
+        /* Réduction de la hauteur de l'image */
+    }
+
+    /* --- Histoire de Passion : Réduction de la taille des photos --- */
+    .photo {
+        width: 200px;
+        height: 250px;
+    }
+}
+
+/* MEDIA QUERY : SMARTPHONE Nos partenaires (Max 600px) */
+
+
+@media (max-width: 600px) {
+
+    main {
+        padding: 0 10px;
+        /* Moins d'espace autour du contenu */
+    }
+
+    .hero-image-banner img {
+        height: 200px;
+    }
+
+    /* --- Histoire de Passion : Les photos s'empilent verticalement --- */
+    .photos-container {
+        width: 200px;
+        /* Fixe la largeur au bloc d'une seule photo */
+        margin: 0 auto 30px auto;
+        margin: 0 auto;
+        flex-direction: column;
+        /* les photos s'empilent verticalement */
+        height: auto;
+    }
+
+    .photo {
+        width: 120px;
+        /* Prend la largeur du conteneur (200px) */
+        height: 180px;
+        display: block;
+        /* S'empile */
+        margin: 10px auto;
+    }
+
+}
+
+/*-----------------------------------------------------------------------------------------
+*/
+/* 7. PAGE NOUS CONTACTER (nouscontacter.html)
+*/
+/* ----------------------------------------------------------------------------------------
+*/
+
+/* Image hero Nous contacter */
+.hero-image-nouscontacter {
+    min-height: 350px;
+    /* hauteur image hero */
+    width: 100%;
+    background-image: url(../images/backgrounds/hero\ nous\ contacter.jpg);
+    background-size: cover;
+    /* pour couvrir toute la zone */
+    background-position: center center;
+    /* centre horizontalement et verticalement */
+    background-repeat: no-repeat;
+}
+
+
+/* Texte sous hero */
+.contact-texte-intro {
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* Formulaire Boostrap amélioré */
+.contact-form-container {
+    max-width: 700px;
+    /* limiter largeur du formulaire */
+    margin: 0 auto;
+    /* centrage horizontal du bloc */
+    padding: 20px;
+}
+
+/* assombrir texte du placeholder */
+.form-control::placeholder {
+    color: #888888;
+    opacity: 1;
+}
+
+/* Bouton ENVOYER créé Boostrap et personnalisé */
+.bouton-envoyer {
+    display: inline-block;
+    background-color: #6D2323;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.bouton-envoyer:hover {
+    background-color: #D9D9D9;
+    color: black;
+}
+
+
+/*-----------------------------------------------------------------------------------------
+*/
+/* 8. PAGE CONNECTION (connection.html)
+*/
+/* ----------------------------------------------------------------------------------------
+*/
+
+/* Hero image */
+.hero-image-connection {
+    min-height: 350px;
+    width: 100%;
+    background-image: url(..//images/backgrounds/photo\ page\ connection.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+.login-box {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.conection-form-container {
+    max-width: 700px;
+    /* limiter largeur du formulaire */
+    margin: 0 auto;
+    /* centrage horizontal du bloc */
+    padding: 20px;
+}
+
+.form-label {
+    margin-bottom: 0.5rem;
+    /* espace entre titres et blocs de formulaire connection */
+}
+
+/* Bouton MDP oublié */
+.mdp-oublie {
+    display: inline-block;
+    background-color: #D9D9D9;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 200;
+    transition: background-color 0.3s ease;
+}
+
+.mdp-oublie:hover {
+    background-color: #6D2323;
+    color: #fff;
+}
+
+/* Bouton Se connecter */
+.bouton-seconnecter {
+    display: inline-block;
+    background-color: #6D2323;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.bouton-seconnecter:hover {
+    background-color: #D9D9D9;
+    color: black;
+}
+
+/* Bouton Créer un compte */
+.bouton-creer {
+    display: inline-block;
+    background-color: #6D2323;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.bouton-creer:hover {
+    background-color: #D9D9D9;
+    color: black;
+}
+
+
+/*-----------------------------------------------------------------------------------------
+*/
+/* 9. PAGE CREER UN COMPTE (creeruncompte.html)
+*/
+/* ----------------------------------------------------------------------------------------
+*/
+
+/* Hero image */
+.hero-image-creercompte {
+    background-image: url(..//images/backgrounds/photo\ page\ nouveau\ client.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 350px;
+    width: 100%;
+}
+
+.intro-texte-creercompte {
+    text-align: center;
+    margin-top: 40PX;
+}
+
+/* Formulaire crétaion compte */
+.creationcompte-form-container {
+    max-width: 700px;
+    /* limiter largeur du formulaire */
+    margin: 0 auto;
+    /* centrage horizontal du bloc */
+    padding: 20px;
+}
+
+/* Bouton ENVOYER */
+.bouton-envoyer-creation {
+    display: inline-block;
+    background-color: #6D2323;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.bouton-envoyer-creation:hover {
+    background-color: #D9D9D9;
+    color: black;
+}
+
+/* Message bouton envoyer */
+.message-btn-enregistrer {
+    text-align: center;
+    margin-top: 10px;
+}

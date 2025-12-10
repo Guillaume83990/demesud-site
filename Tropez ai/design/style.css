@@ -1,0 +1,262 @@
+:root{
+  --nav-height: 88px;
+  --gold: #D4AF37;
+  --bg: #0A0A0A;
+  --card-bg: #111;
+}
+
+/* ---------- BASE ---------- */
+* { box-sizing: border-box; }
+html,body { height: 100%; }
+body {
+  margin: 0;
+  padding-top: var(--nav-height); /* réserve l'espace pour la nav fixe */
+  font-family: 'Raleway', sans-serif;
+  background-color: var(--bg);
+  color: #F5F5F5;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- NAVIGATION ---------- */
+nav {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  display: flex;
+  justify-content: center;     /* menu centré horizontalement */
+  align-items: center;
+  padding: 0 40px;
+  z-index: 1000;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
+}
+
+/* logo à gauche, verticalement centré */
+nav .logo {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+nav .logo img {
+  height: 64px;
+  width: 64px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  box-shadow: 0 0 8px rgba(212,175,55,0.55);
+}
+
+/* menu centré */
+nav .menu {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+nav a {
+  text-decoration: none;
+  color: #F5F5F5;
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  transition: color .25s ease, transform .15s ease;
+}
+nav a:hover { color: var(--gold); transform: translateY(-2px); }
+
+/* burger (mobile) */
+.burger { display: none; font-size: 1.9rem; cursor: pointer; color: #F5F5F5; }
+
+/* ---------- HERO ---------- */
+.hero {
+  position: relative;
+  height: calc(100vh - var(--nav-height)); /* adapte la hauteur pour la nav fixe */
+  width: 100%;
+  background-image: url('../images/Vue de saint tropez.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero::after{
+  content: "";
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.45); /* légèrement moins sombre */
+  z-index: 1;
+}
+
+.hero-content{
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  max-width: 900px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ligne 1 & 2 */
+#line1 {
+  font-family: 'Cinzel', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  text-shadow: 0 0 12px rgba(0,0,0,0.6);
+  min-height: 3.8rem;
+}
+
+#line2 {
+  font-family: 'Cinzel', serif;
+  font-size: 1.7rem;
+  font-weight: 400;
+  color: var(--gold);
+  text-shadow: 0 0 10px rgba(0,0,0,0.55);
+  min-height: 2.2rem;
+}
+
+/* texte intro qui s'affiche après le typing (fallback visible si JS absent) */
+.hero-intro {
+  margin-top: 24px;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  max-width: 700px;
+  color: #F5F5F5;
+}
+
+/* ---------- INTRO / CHATBOT / MAIN ---------- */
+.intro-text {
+  text-align: center;
+  padding: 60px 20px;
+}
+.intro-text p {
+  font-size: 1.18rem;
+  max-width: 900px;
+  margin: auto;
+}
+.highlight { color: var(--gold); font-weight: bold; }
+
+.chatbot-section {
+  text-align: center;
+  padding: 60px 20px;
+}
+.chatbot-section h2 { color: var(--gold); margin-bottom: 12px; }
+.chatbot-container iframe {
+  width: 100%;
+  max-width: 600px;
+  height: 500px;
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+}
+
+/* MAIN INFO / FEATURES */
+.main-info { text-align: center; padding: 80px 20px; }
+.main-info h2 { color: var(--gold); margin-bottom: 40px; }
+.features { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; }
+.feature { max-width:300px; }
+.feature h3 { color: var(--gold); margin-bottom:10px; }
+
+/* steps / plans */
+.how-it-works .steps { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-top:20px; }
+.step span { font-size:2rem; color: var(--gold); }
+
+.plans { display:flex; justify-content:center; gap:30px; flex-wrap:wrap; margin-top:20px; }
+.plan { background: var(--card-bg); padding:20px; border-radius:12px; border:2px solid var(--gold); max-width:250px; }
+.plan h3 { color: var(--gold); margin-bottom:10px; }
+.cta-button { display:inline-block; margin-top:20px; padding:12px 30px; border-radius:30px; color:#111; background:var(--gold); font-weight:bold; text-decoration:none; }
+.cta-button:hover { transform: scale(1.03); }
+
+/* ---------- GALERIE (layout alterné) ---------- */
+.gallery {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.gallery-row {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 40px;
+  margin: 40px auto;
+  max-width: 1000px;
+}
+
+.gallery-row.reverse { flex-direction: row-reverse; }
+
+/* images plus petites et élégantes */
+.gallery-image img {
+  max-width: 340px;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  display:block;
+}
+
+.gallery-text { flex:1; text-align:left; }
+.gallery-text h3 { color: var(--gold); margin-bottom:8px; font-size:1.4rem; }
+.gallery-text p { font-size:1.05rem; line-height:1.6; color:#ddd; }
+
+/* ---------- TÉMOIGNAGES ---------- */
+.testimonials { text-align:center; padding:60px 20px; background: var(--card-bg); }
+.testimonials h2 { color: var(--gold); margin-bottom: 30px; }
+.testimonial { max-width:700px; margin: 20px auto; font-style: italic; font-size:1.05rem; color:#eee; }
+.testimonial span { display:block; margin-top:10px; font-weight:bold; color:var(--gold); }
+
+/* ---------- FOOTER ---------- */
+footer { text-align:center; padding:40px 20px; background:#222; color:#ccc; }
+footer a { color: var(--gold); text-decoration:none; }
+footer a:hover { text-decoration:underline; }
+
+/* ---------- EFFETS SCROLL (JS / no-JS friendly) ---------- */
+
+/* Par défaut (no-js) : on veut que tout soit visible -> pas d'opacité cachée */
+.reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* Si JS est présent, on active le mode "animé" : on cache d'abord et on révèle avec .active */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .8s cubic-bezier(.2,.9,.3,1), transform .8s cubic-bezier(.2,.9,.3,1);
+}
+.js .reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* variantes gauche/droite pour la galerie (JS only) */
+.js .gallery-text.reveal { transform: translateX(40px); }
+.js .gallery-image.reveal { transform: translateX(-40px); }
+.js .gallery-text.reveal.active,
+.js .gallery-image.reveal.active {
+  transform: translateX(0);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 992px) {
+  :root { --nav-height: 80px; }
+  nav { padding: 0 24px; }
+  nav .logo { left: 14px; }
+  #line1 { font-size: 2.6rem; }
+}
+@media (max-width: 768px) {
+  :root { --nav-height: 76px; }
+  body { padding-top: var(--nav-height); }
+  nav { flex-direction: column; height: var(--nav-height); padding: 8px 16px; }
+  nav .logo { position: static; transform: none; margin-right: 0; margin-bottom: 6px; }
+  nav .menu { gap: 14px; flex-wrap: wrap; justify-content:center; }
+  .burger { display:block; }
+  .hero { height: calc(100vh - var(--nav-height)); background-position: center 30%; }
+  #line1 { font-size: 1.8rem; }
+  #line2 { font-size: 1.05rem; }
+  .gallery-row { flex-direction: column; text-align: center; }
+  .gallery-row.reverse { flex-direction: column; }
+  .gallery-text { text-align:center; }
+  .gallery-image img { max-width: 90%; }
+  .chatbot-container iframe { height: 400px; }
+}

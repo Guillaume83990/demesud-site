@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--CDN A AJOUTER SUR TOUTES LES PAGES-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!--AMELIORATION SEO-->
+    <!--Titre-->
+    <title>Nos partenaires locaux - Collaborations Artisans - Vite & gourmand traiteur</title>
+    <!--description-->
+    <meta name="description"
+        content="Découvre les artisans et producteurs locaux de confiance qui collaborent avec Vite & Gourmand pour vous offrir des produits frais et responsables.">
+    <!--Mots clés-->
+    <meta name="keywords" content="partenaires traiteur, collaborations locales, artisans Bordeaux, produits frais.">
+
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="images/icons/FAVICON vite & Gourmand.ico">
+
+    <!--BOOSTRAP CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- CSS-->
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+
+    <body class="internal"> <!-- class permet de pousser le contenu avec CSS-->
+
+        <div id="header"></div>
+        <!-- le contenu du header.html sera inséré ici -->
+
+        <h1>Découvrez nos menus gourmands pour toutes les occasions.</h1>
+        <p class="lead">
+            Noël, Pâques, Saint-Valentin, Halloween ou simplement pour tous les jours,
+            nos menus s'adaptent à chaque moment.</p>
+
+        <div class="promo">
+            <div class="badge">🎉</div>
+            <div class="badge-text">
+                <strong>OFFRE PROMOTIONNELLE -10%</strong> — pour les menus Noël, Pâques, Halloween,
+                Saint-Valentin et les menus du quotidien.
+            </div>
+        </div>
+
+        <h2 class="filter-title">Rechercher un menu</h2>
+
+        <!-- FILTRES -->
+        <div class="filters-row">
+
+            <select id="prixMax" class="filter-field select">
+                <option value="">Prix maximum</option>
+                <option value="20">20€</option>
+                <option value="40">40€</option>
+                <option value="60">60€</option>
+                <option value="80">80€</option>
+                <option value="100">100€</option>
+            </select>
+
+            <select id="fourchettePrix" class="filter-field select">
+                <option value="">Fourchette de prix</option>
+                <option value="0-25">0 — 25€</option>
+                <option value="25-40">25 — 40€</option>
+                <option value="40-60">40 — 60€</option>
+                <option value="60-9999">> 60€</option>
+            </select>
+
+            <select id="theme" class="filter-field select">
+                <option value="">Thème</option>
+                <option value="noel">🎄 Noël</option>
+                <option value="paques">🐰 Pâques</option>
+                <option value="halloween">🎃 Halloween</option>
+                <option value="saintvalentin">❤️ Saint-Valentin</option>
+                <option value="quotidien">🍽️ Au quotidien</option>
+                <option value="evenements">🥂 Événements</option>
+            </select>
+
+            <select id="regime" class="filter-field select">
+                <option value="">Régime</option>
+                <option value="classique">🥩 Classique</option>
+                <option value="vegetarien">🌿 Végétarien</option>
+                <option value="vegan">🥕 Végan</option>
+            </select>
+
+            <input id="nbPersonnes" type="number" min="1" placeholder="Nombre pers minimum" class="filter-field">
+        </div>
+
+        <!-- VUE GLOBALE DES MENUS -->
+
+        <main>
+            <!-- Menus à thèmes -->
+            <h2 class="section-title">Nos menus à thèmes 🎉</h2>
+            <div id="section-themes" class="menu-grid"></div>
+
+            <!-- Menus du quotidien -->
+            <h2 class="section-title">Nos menus du quotidien 🍽️</h2>
+            <div id="section-quotidien" class="menu-grid"></div>
+
+            <!-- Menus événements -->
+            <h2 class="section-title">Nos menus événements 🥂</h2>
+            <div id="section-evenements" class="menu-grid"></div>
+        </main>
+
+        <!-- Modal détails full-screen -->
+        <section id="menu-detail" class="detail-modal hidden">
+            <div class="detail-container">
+
+                <button id="close-detail" class="close-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <!-- Image du menu -->
+                <img id="detail-img" src="" alt="Image menu détaillé" class="detail-img">
+
+                <h2 id="detail-title"></h2>
+                <p id="detail-description"></p>
+
+                <!-- Versions si plusieurs -->
+                <h3>Versions disponibles</h3>
+                <div id="detail-versions" class="version-list"></div>
+
+                <!-- Entrée / Plat / Dessert -->
+                <h3>Menu complet</h3>
+                <ul id="detail-menu">
+                    <li><strong>Entrée:</strong> <span id="detail-entree"></span></li>
+                    <li><strong>Plat:</strong> <span id="detail-plat"></span></li>
+                    <li><strong>Dessert:</strong> <span id="detail-dessert"></span></li>
+                </ul>
+
+                <h3>Liste des allergènes</h3>
+                <ul id="detail-allergenes" class="allergen-list"></ul>
+
+                <h3>Consignes de conservation</h3>
+                <p id="detail-consignes"></p>
+
+                <button id="order-btn" class="order-btn">Commander</button>
+
+            </div>
+        </section>
+
+
+        <div id="footer"></div>
+        <!-- le contenu du footer.html sera inséré ici -->
+
+        <script src="./JS/style.js"></script>
+        <!-- lien JS pour HEADER & FOOTER DRY-->
+        <script src="./JS/dry-injector.js"></script>
+
+    </body>
+
+</html>

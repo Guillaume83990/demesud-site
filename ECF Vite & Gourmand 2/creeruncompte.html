@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--CDN A AJOUTER SUR TOUTES LES PAGES-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!--AMELIORATION SEO-->
+    <!--Titre-->
+    <title>Creez votre compte Vite & Gourmand
+    </title>
+    <!--description-->
+    <meta name="description"
+        content="Créez votre compte Vite & Gourmand et profitez d'un espace client pour gérer vos commandes.Rapide, pratique et 100% gourmand.">
+    <!--Mots clés-->
+    <meta name="keywords" content="traiteur Bordeaux, inscription, compte client, commande repas, plats faits maison.">
+
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="images/icons/FAVICON vite & Gourmand.ico">
+
+    <!--BOOSTRAP CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!-- CSS-->
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+
+<body>
+    <div id="header"></div>
+    <!-- le contenu du header.html sera inséré ici -->
+
+
+    <main>
+
+        <!-- SECTION HERO -->
+        <section class="hero-image-creercompte"></section>
+
+        <div class="intro-texte-creercompte">
+            <h1>Créez un compte Vite & Gourmand</h1>
+        </div>
+
+        <!-- SECTION FORMULAIRE CREATION COMPTE -->
+
+        <div class="creationcompte-form-container">
+
+            <div class="mb-3">
+                <label for="formulairecreation" class="form-label">Nom:</label>
+                <input type="nom" class="form-control" id="formulairecreationnom" placeholder="DUPONT">
+            </div>
+            <div class="mb-3">
+                <label for="formulairecreation" class="form-label">Prénom:</label>
+                <input type="prenom" class="form-control" id="formulairecreationprenom" placeholder="Guillaume">
+            </div>
+            <div class="mb-3">
+                <label for="formulairecreation" class="form-label">Adresse mail:</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="dupont.g@gmail.com">
+            </div>
+            <div class="mb-3">
+                <label for="formulairecreation" class="form-label">Téléphone:</label>
+                <input type="tel" class="form-control" id="formulairecreationtelephone" placeholder="0633333333">
+            </div>
+            <div class="mb-3">
+                <label for="formulairecreation" class="form-label">Adresse postale:</label>
+                <textarea class="form-control" id="formulairecreationadresse"
+                    placeholder="2 place du marcher 33000 BORDEAUX" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="formulairecreation" class="form-label">Mot de passe:</label>
+                <input type="password" id="mdpcreation" class="form-control" aria-describedby="passwordHelpInline">
+            </div>
+            <span id="passwordHelpInline" class="form-text">
+                Doit comporter au minimum 10 caractères dont: <br> ( 1 caractère spécifique, 1 majuscule, 1
+                minuscule
+                et 1
+                chiffre).
+            </span>
+        </div>
+
+        <!-- BOUTON ENVOYER-->
+
+        <form id="creationcompteform">
+            <div class="alert d-none" role="alert" id="alerteCreationCompteMessage"></div>
+        </form>
+        <div class="text-center mt-4 mb-3">
+            <button type="button" class="bouton-envoyer-creation" id="liveAlertBtnCreation">Envoyer</button>
+        </div>
+        </div>
+
+        <div class="message-btn-enregistrer">
+            <p>Une fois votre inscription finalisée, un mail de bienvenu vous sera envoyé.</p>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <div id="footer"></div>
+    <!-- le contenu du footer.html sera inséré ici -->
+    <script src="./JS/style.js"></script>
+    <!-- lien JS pour HEADER & FOOTER DRY-->
+    <script src="./JS/dry-injector.js"></script>
+
+</body>
+
+</html>
