@@ -1,490 +1,426 @@
 /* ==========================================
-   PAGE CONTACT - JAVASCRIPT
-   Gestion formulaire EmailJS et animations
+   CONTACT - JAVASCRIPT
 ========================================== */
 
-'use strict';
-
+// Attendre que le DOM soit chargé
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('📧 Page Contact - Initialisation...');
 
-    // Initialiser tous les modules
-    initFormHandling();
-    initScrollAnimations();
-    initSmoothScroll();
+    // ========================================
+    // VALIDATION DU FORMULAIRE
+    // ========================================
+    const contactForm = document.getElementById('contact-form');
 
-    console.log('✅ Page Contact - Chargée avec succès');
-});
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
 
-// ==========================================
-// GESTION FORMULAIRE
-// ==========================================
+            // Reset des erreurs
+            clearErrors();
 
-function initFormHandling() {
-    const form = document.getElementById('contactForm');
-    if (!form) return;
+            // Validation
+            let isValid = true;
 
-    form.addEventListener('submit', async function (e) {
-        e.preventDefault();
+            // Nom
+            const nom = document.getElementById('nom');
+            if (!nom.value.trim()) {
+                showError(nom, 'Le nom est requis');
+                isValid = false;
+            }
 
-        // Vérifier le consentement
-        const consent = document.getElementById('consent');
-        if (!consent.checked) {
-            showNotification('Veuillez accepter la politique de confidentialité', 'error');
-            return;
-        }
+            // Prénom
+            const prenom = document.getElementById('prenom');
+            if (!prenom.value.trim()) {
+                showError(prenom, 'Le prénom est requis');
+                isValid = false;
+            }
 
-        // Récupérer les données du formulaire
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value,
-            service: document.getElementById('service').value,
-            message: document.getElementById('message').value
-        };
+            // Email
+            const email = document.getElementById('email');
+            if (!email.value.trim()) {
+                showError(email, 'L\'email est requis');
+                isValid = false;
+            } else if (!isValidEmail(email.value)) {
+                showError(email, 'Email invalide');
+                isValid = false;
+            }
 
-        // Valider les données
-        if (!validateForm(formData)) {
-            return;
-        }
+            // Téléphone
+            const telephone = document.getElementById('telephone');
+            if (!telephone.value.trim()) {
+                showError(telephone, 'Le téléphone est requis');
+                isValid = false;
+            } else if (!isValidPhone(telephone.value)) {
+                showError(telephone, 'Numéro de téléphone invalide');
+                isValid = false;
+            }
 
-        // Afficher le loader
-        const submitBtn = form.querySelector('.btn-submit');
-        submitBtn.classList.add('loading');
+            // Service
+            const service = document.getElementById('service');
+            if (!service.value) {
+                showError(service, 'Veuillez sélectionner un service');
+                isValid = false;
+            }
 
-        try {
-            // Envoyer via EmailJS
-            await emailjs.send(
-                'service_demesud',  // Service ID à configurer dans EmailJS
-                'template_contact',  // Template ID à configurer dans EmailJS
-                {
-                    from_name: formData.name,
-                    from_email: formData.email,
-                    phone: formData.phone,
-                    service: formData.service,
-                    message: formData.message,
-                    to_email: 'contact@demesud.com'
+            // Message
+            const message = document.getElementById('message');
+            if (!message.value.trim()) {
+                showError(message, 'Le message est requis');
+                isValid = false;
+            } else if (message.value.trim().length < 10) {
+                showError(message, 'Le message doit contenir au moins 10 caractères');
+                isValid = false;
+            }
+
+            // RGPD
+            const rgpd = document.getElementById('rgpd');
+            if (!rgpd.checked) {
+                showError(rgpd, 'Vous devez accepter le traitement de vos données');
+                isValid = false;
+            }
+
+            // Si tout est valide
+            if (isValid) {
+                submitForm();
+            } else {
+                // Scroll vers la première erreur
+                const firstError = document.querySelector('.form-group.error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }
-            );
+            }
+        });
+    }
 
+    // ========================================
+    // FONCTIONS DE VALIDATION
+    // ========================================
+
+    function showError(element, message) {
+        const formGroup = element.closest('.form-group') || element.closest('.checkbox-group');
+        formGroup.classList.add('error');
+        const errorMessage = formGroup.querySelector('.error-message');
+        if (errorMessage) {
+            errorMessage.textContent = message;
+        }
+    }
+
+    function clearErrors() {
+        const errorGroups = document.querySelectorAll('.form-group.error, .checkbox-group.error');
+        errorGroups.forEach(group => {
+            group.classList.remove('error');
+            const errorMessage = group.querySelector('.error-message');
+            if (errorMessage) {
+                errorMessage.textContent = '';
+            }
+        });
+    }
+
+    function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
+    function isValidPhone(phone) {
+        const re = /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/;
+        return re.test(phone.replace(/\s/g, ''));
+    }
+
+    function submitForm() {
+        const formResponse = document.querySelector('.form-response');
+        const submitButton = document.querySelector('.btn-submit');
+
+        // Désactiver le bouton
+        submitButton.disabled = true;
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
+
+        // Simuler l'envoi (remplacer par votre logique d'envoi réelle)
+        setTimeout(() => {
             // Succès
-            console.log('✅ Email envoyé avec succès');
-            showSuccessModal();
-            form.reset();
+            formResponse.className = 'form-response success';
+            formResponse.textContent = '✓ Votre message a été envoyé avec succès ! Nous vous recontacterons dans les plus brefs délais.';
+            formResponse.style.display = 'block';
 
-            // Analytics
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'form_submit', {
-                    event_category: 'Contact',
-                    event_label: formData.service
-                });
-            }
+            // Reset du formulaire
+            contactForm.reset();
 
-        } catch (error) {
-            console.error('❌ Erreur envoi email:', error);
-            showNotification('Une erreur est survenue. Veuillez réessayer ou nous appeler directement.', 'error');
-        } finally {
-            submitBtn.classList.remove('loading');
-        }
-    });
+            // Réactiver le bouton
+            submitButton.disabled = false;
+            submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer ma demande';
 
-    // Validation en temps réel
-    const inputs = form.querySelectorAll('input, select, textarea');
-    inputs.forEach(input => {
-        input.addEventListener('blur', function () {
-            validateField(this);
-        });
+            // Scroll vers le message de succès
+            formResponse.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
+            // Cacher le message après 10 secondes
+            setTimeout(() => {
+                formResponse.style.display = 'none';
+            }, 10000);
+
+        }, 2000);
+
+        // En cas d'erreur (exemple)
+        // formResponse.className = 'form-response error';
+        // formResponse.textContent = '✗ Une erreur est survenue. Veuillez réessayer.';
+        // formResponse.style.display = 'block';
+    }
+
+    // ========================================
+    // SUPPRESSION DES ERREURS EN TEMPS RÉEL
+    // ========================================
+    const formInputs = document.querySelectorAll('.contact-form input, .contact-form select, .contact-form textarea');
+    formInputs.forEach(input => {
         input.addEventListener('input', function () {
-            if (this.classList.contains('error')) {
-                validateField(this);
+            const formGroup = this.closest('.form-group') || this.closest('.checkbox-group');
+            if (formGroup.classList.contains('error')) {
+                formGroup.classList.remove('error');
             }
         });
     });
-}
 
-// ==========================================
-// VALIDATION FORMULAIRE
-// ==========================================
+    // ========================================
+    // FAQ ACCORDION
+    // ========================================
+    const faqItems = document.querySelectorAll('.faq-item');
 
-function validateForm(formData) {
-    let isValid = true;
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
 
-    // Valider le nom
-    if (formData.name.trim().length < 2) {
-        showFieldError('name', 'Le nom doit contenir au moins 2 caractères');
-        isValid = false;
-    }
+        question.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
 
-    // Valider l'email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-        showFieldError('email', 'Email invalide');
-        isValid = false;
-    }
-
-    // Valider le téléphone (optionnel mais si rempli doit être valide)
-    if (formData.phone) {
-        const phoneRegex = /^[\d\s\.\-\+\(\)]{10,}$/;
-        if (!phoneRegex.test(formData.phone)) {
-            showFieldError('phone', 'Téléphone invalide');
-            isValid = false;
-        }
-    }
-
-    // Valider le service
-    if (!formData.service) {
-        showFieldError('service', 'Veuillez sélectionner un service');
-        isValid = false;
-    }
-
-    // Valider le message
-    if (formData.message.trim().length < 10) {
-        showFieldError('message', 'Le message doit contenir au moins 10 caractères');
-        isValid = false;
-    }
-
-    return isValid;
-}
-
-function validateField(field) {
-    const value = field.value.trim();
-    let isValid = true;
-    let errorMessage = '';
-
-    switch (field.id) {
-        case 'name':
-            if (value.length < 2) {
-                errorMessage = 'Le nom doit contenir au moins 2 caractères';
-                isValid = false;
-            }
-            break;
-
-        case 'email':
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(value)) {
-                errorMessage = 'Email invalide';
-                isValid = false;
-            }
-            break;
-
-        case 'phone':
-            if (value) {
-                const phoneRegex = /^[\d\s\.\-\+\(\)]{10,}$/;
-                if (!phoneRegex.test(value)) {
-                    errorMessage = 'Téléphone invalide';
-                    isValid = false;
+            // Fermer tous les autres items
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
                 }
+            });
+
+            // Toggle l'item cliqué
+            if (isActive) {
+                item.classList.remove('active');
+            } else {
+                item.classList.add('active');
             }
-            break;
+        });
+    });
 
-        case 'service':
-            if (!value) {
-                errorMessage = 'Veuillez sélectionner un service';
-                isValid = false;
-            }
-            break;
-
-        case 'message':
-            if (value.length < 10) {
-                errorMessage = 'Le message doit contenir au moins 10 caractères';
-                isValid = false;
-            }
-            break;
-    }
-
-    if (isValid) {
-        clearFieldError(field.id);
-    } else {
-        showFieldError(field.id, errorMessage);
-    }
-
-    return isValid;
-}
-
-function showFieldError(fieldId, message) {
-    const field = document.getElementById(fieldId);
-    if (!field) return;
-
-    field.classList.add('error');
-
-    // Ajouter bordure rouge
-    field.style.borderColor = '#e74c3c';
-
-    // Retirer l'erreur après 3 secondes
-    setTimeout(() => {
-        clearFieldError(fieldId);
-    }, 3000);
-}
-
-function clearFieldError(fieldId) {
-    const field = document.getElementById(fieldId);
-    if (!field) return;
-
-    field.classList.remove('error');
-    field.style.borderColor = '';
-}
-
-// ==========================================
-// MODAL SUCCESS
-// ==========================================
-
-function showSuccessModal() {
-    const modal = document.getElementById('successModal');
-    if (modal) {
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-function closeModal() {
-    const modal = document.getElementById('successModal');
-    if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-    }
-}
-
-// Fermer modal au clic sur le fond
-document.getElementById('successModal')?.addEventListener('click', function (e) {
-    if (e.target === this) {
-        closeModal();
-    }
-});
-
-// Fermer modal avec Escape
-document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') {
-        closeModal();
-    }
-});
-
-// Exposer closeModal globalement
-window.closeModal = closeModal;
-
-// ==========================================
-// NOTIFICATIONS
-// ==========================================
-
-function showNotification(message, type = 'info') {
-    // Créer la notification
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.innerHTML = `
-        <i class="fas fa-${type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-        <span>${message}</span>
-    `;
-
-    // Ajouter au body
-    document.body.appendChild(notification);
-
-    // Styles inline
-    notification.style.cssText = `
-        position: fixed;
-        top: 100px;
-        right: 20px;
-        padding: 20px 25px;
-        background: ${type === 'error' ? '#e74c3c' : '#3498db'};
-        color: white;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-weight: 600;
-        z-index: 10000;
-        animation: slideInRight 0.4s ease;
-        max-width: 400px;
-    `;
-
-    // Retirer après 5 secondes
-    setTimeout(() => {
-        notification.style.animation = 'slideOutRight 0.4s ease';
-        setTimeout(() => notification.remove(), 400);
-    }, 5000);
-}
-
-// Ajouter les animations pour les notifications
-if (!document.getElementById('notification-animations')) {
-    const style = document.createElement('style');
-    style.id = 'notification-animations';
-    style.textContent = `
-        @keyframes slideInRight {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        @keyframes slideOutRight {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-        }
-    `;
-    document.head.appendChild(style);
-}
-
-// ==========================================
-// ANIMATIONS AU SCROLL
-// ==========================================
-
-function initScrollAnimations() {
+    // ========================================
+    // ANIMATIONS AU SCROLL
+    // ========================================
     const observerOptions = {
         threshold: 0.1,
-        rootMargin: '0px 0px -80px 0px'
+        rootMargin: '0px 0px -50px 0px'
     };
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
             }
         });
     }, observerOptions);
 
-    // Éléments à animer
-    const animatedElements = document.querySelectorAll(`
-        .method-card,
-        .form-container,
-        .info-card,
-        .section-head
-    `);
-
-    animatedElements.forEach((el, index) => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(40px)';
-        el.style.transition = `opacity 0.8s ease ${index * 0.1}s, transform 0.8s ease ${index * 0.1}s`;
-        observer.observe(el);
+    // Observer les cartes de contact rapide
+    const quickCards = document.querySelectorAll('.quick-contact-card');
+    quickCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${index * 0.15}s`;
+        observer.observe(card);
     });
 
-    // Style pour l'état animé
-    const style = document.createElement('style');
-    style.textContent = `
-        .animate-in {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-        }
-    `;
-    document.head.appendChild(style);
-}
+    // Observer les cartes de bureau
+    const officeCards = document.querySelectorAll('.office-card');
+    officeCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateX(20px)';
+        card.style.transition = `opacity 0.6s ease ${index * 0.2}s, transform 0.6s ease ${index * 0.2}s`;
+        observer.observe(card);
+    });
 
-// ==========================================
-// SMOOTH SCROLL
-// ==========================================
+    // Observer les items FAQ
+    const faqItemsAnim = document.querySelectorAll('.faq-item');
+    faqItemsAnim.forEach((item, index) => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(-20px)';
+        item.style.transition = `opacity 0.5s ease ${index * 0.08}s, transform 0.5s ease ${index * 0.08}s`;
+        observer.observe(item);
+    });
 
-function initSmoothScroll() {
+    // ========================================
+    // SMOOTH SCROLL
+    // ========================================
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-
-            if (href === '#' || !href) return;
-
-            const target = document.querySelector(href);
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                e.preventDefault();
-
-                const headerHeight = document.querySelector('.main-header')?.offsetHeight || 0;
-                const targetPosition = target.offsetTop - headerHeight - 20;
-
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
                 });
             }
         });
     });
-}
 
-// ==========================================
-// ACCESSIBILITÉ
-// ==========================================
+    // ========================================
+    // ANIMATION DU HERO
+    // ========================================
+    const heroContent = document.querySelector('.page-hero .container');
+    if (heroContent) {
+        heroContent.style.opacity = '0';
+        heroContent.style.transform = 'translateY(20px)';
 
-const focusableElements = document.querySelectorAll(`
-    a,
-    button,
-    input,
-    select,
-    textarea,
-    [tabindex]:not([tabindex="-1"])
-`);
+        setTimeout(() => {
+            heroContent.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            heroContent.style.opacity = '1';
+            heroContent.style.transform = 'translateY(0)';
+        }, 100);
+    }
 
-focusableElements.forEach(element => {
-    element.addEventListener('focus', function () {
-        this.style.outline = '3px solid var(--color-orange)';
-        this.style.outlineOffset = '4px';
+    // ========================================
+    // GESTION DU SCROLL HEADER
+    // ========================================
+    let lastScroll = 0;
+    const header = document.querySelector('header');
+
+    if (header) {
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
+    }
+
+    // ========================================
+    // EFFET PARALLAXE HERO
+    // ========================================
+    const heroSection = document.querySelector('.page-hero');
+    const heroImage = document.querySelector('.hero-bg');
+
+    if (heroSection && heroImage) {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroHeight = heroSection.offsetHeight;
+
+            if (scrolled < heroHeight) {
+                const parallaxSpeed = 0.5;
+                heroImage.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
+            }
+        });
+    }
+
+    // ========================================
+    // ANIMATION DES ICÔNES
+    // ========================================
+    const quickIcons = document.querySelectorAll('.quick-icon');
+    quickIcons.forEach(icon => {
+        const card = icon.closest('.quick-contact-card');
+
+        card.addEventListener('mouseenter', function () {
+            icon.style.transform = 'scale(1.1) rotate(5deg)';
+            icon.style.transition = 'transform 0.3s ease';
+        });
+
+        card.addEventListener('mouseleave', function () {
+            icon.style.transform = 'scale(1) rotate(0deg)';
+        });
     });
 
-    element.addEventListener('blur', function () {
-        this.style.outline = '';
-        this.style.outlineOffset = '';
+    // ========================================
+    // GESTION DES IMAGES
+    // ========================================
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+        img.addEventListener('load', function () {
+            this.classList.add('loaded');
+        });
+
+        img.addEventListener('error', function () {
+            console.warn('Erreur de chargement de l\'image:', this.src);
+        });
     });
+
+    // ========================================
+    // AUTO-REMPLISSAGE DATE (DATE MINIMALE = AUJOURD'HUI)
+    // ========================================
+    const dateInput = document.getElementById('date-souhaitee');
+    if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+    }
+
+    // ========================================
+    // FORMATAGE TÉLÉPHONE EN TEMPS RÉEL
+    // ========================================
+    const telephoneInput = document.getElementById('telephone');
+    if (telephoneInput) {
+        telephoneInput.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 10) {
+                value = value.substring(0, 10);
+            }
+            if (value.length > 0) {
+                value = value.match(/.{1,2}/g).join(' ');
+            }
+            e.target.value = value;
+        });
+    }
+
+    // ========================================
+    // PAGE LOADED
+    // ========================================
+    window.addEventListener('load', function () {
+        document.body.classList.add('page-loaded');
+        console.log('✓ Page Contact chargée avec succès');
+    });
+
+    // ========================================
+    // CONSOLE LOG DEBUG
+    // ========================================
+    console.log('=================================');
+    console.log('Contact - Page initialisée');
+    console.log('=================================');
+    console.log('Quick cards:', quickCards.length);
+    console.log('Office cards:', officeCards.length);
+    console.log('FAQ items:', faqItems.length);
+    console.log('=================================');
+
 });
 
-// ==========================================
-// PERFORMANCE - DEBOUNCE RESIZE
-// ==========================================
+// ========================================
+// FONCTION UTILITAIRE
+// ========================================
+function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
 
-let resizeAnimationStopper;
+// ========================================
+// GESTION REDIMENSIONNEMENT
+// ========================================
+let resizeTimer;
 window.addEventListener('resize', () => {
-    document.body.classList.add('resize-animation-stopper');
-    clearTimeout(resizeAnimationStopper);
-    resizeAnimationStopper = setTimeout(() => {
-        document.body.classList.remove('resize-animation-stopper');
-    }, 400);
-}, { passive: true });
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        console.log('Fenêtre redimensionnée');
+    }, 250);
+});
 
-// Style pour stopper les animations pendant resize
-if (!document.getElementById('resize-stopper-style')) {
-    const style = document.createElement('style');
-    style.id = 'resize-stopper-style';
-    style.textContent = `
-        .resize-animation-stopper * {
-            animation: none !important;
-            transition: none !important;
-        }
-    `;
-    document.head.appendChild(style);
-}
-
-// ==========================================
-// ERROR HANDLING
-// ==========================================
-
-window.addEventListener('error', (e) => {
-    console.error('❌ Erreur JavaScript:', e.message);
-}, true);
-
-// ==========================================
-// LOGS DE DEBUG
-// ==========================================
-
-console.log('📊 Statistiques page Contact:');
-console.log('  - Méthodes:', document.querySelectorAll('.method-card').length);
-console.log('  - Infos cards:', document.querySelectorAll('.info-card').length);
-console.log('  - EmailJS:', typeof emailjs !== 'undefined' ? 'Chargé' : 'Non chargé');
-
-// ==========================================
-// UTILITIES
-// ==========================================
-
-// Fonction debounce réutilisable
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
+// ========================================
+// EXPORT
+// ========================================
+window.contactPage = {
+    isElementInViewport: isElementInViewport
+};
