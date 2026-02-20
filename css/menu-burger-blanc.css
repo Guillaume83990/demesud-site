@@ -1,0 +1,246 @@
+/* ==========================================
+   MENU BURGER - FOND 100% BLANC
+   Correction totale du menu mobile
+========================================== */
+
+@media (max-width: 768px) {
+
+    /* ===== MENU PRINCIPAL - FOND BLANC TOTAL ===== */
+
+    /* Navigation mobile */
+    .main-nav,
+    .nav-menu,
+    .mobile-menu,
+    nav[class*="nav"] {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+    }
+
+    /* Container du menu */
+    .main-nav .container,
+    .nav-menu .container,
+    .mobile-menu .container {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+    }
+
+    /* Liste des liens */
+    .nav-links,
+    ul[class*="nav"] {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Items de liste */
+    .nav-links li,
+    .nav-links>li,
+    li[class*="nav"] {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+        border-bottom: 1px solid #f0f0f0 !important;
+    }
+
+    /* Dernière bordure retirée */
+    .nav-links li:last-child {
+        border-bottom: none !important;
+    }
+
+    /* ===== LIENS - TEXTE BLEU ===== */
+
+    /* Tous les liens */
+    .nav-links a,
+    .nav-links>li>a,
+    .main-nav a,
+    .nav-menu a,
+    .mobile-menu a {
+        color: #003d7a !important;
+        background: transparent !important;
+        font-weight: 600 !important;
+        font-size: 15px !important;
+        padding: 16px 25px !important;
+        display: block !important;
+        text-decoration: none !important;
+        transition: all 0.3s ease !important;
+    }
+
+    /* Hover sur les liens */
+    .nav-links a:hover,
+    .nav-links>li>a:hover,
+    .main-nav a:hover,
+    .nav-menu a:hover,
+    .mobile-menu a:hover {
+        background: #f5f7fa !important;
+        color: #ff6b35 !important;
+        padding-left: 30px !important;
+    }
+
+    /* Lien actif */
+    .nav-links a.active,
+    .nav-links>li>a.active,
+    .main-nav a.active,
+    .nav-menu a.active,
+    .mobile-menu a.active {
+        background: #E3F2FD !important;
+        color: #003d7a !important;
+        font-weight: 700 !important;
+        border-left: 4px solid #ff6b35 !important;
+    }
+
+    /* ===== OVERLAY - BLANC SEMI-TRANSPARENT ===== */
+
+    /* Overlay derrière le menu */
+    .nav-overlay,
+    .menu-overlay,
+    [class*="overlay"] {
+        background: rgba(255, 255, 255, 0.95) !important;
+    }
+
+    /* ===== SUPPRESSION DES GRIS ===== */
+
+    /* Supprimer TOUS les backgrounds gris */
+    .main-nav *,
+    .nav-menu *,
+    .mobile-menu *,
+    .nav-links *,
+    nav[class*="nav"] * {
+        background-color: transparent !important;
+    }
+
+    /* Restaurer le blanc sur les conteneurs principaux */
+    .main-nav,
+    .nav-menu,
+    .mobile-menu,
+    .nav-links,
+    .nav-links li {
+        background: #ffffff !important;
+        background-color: #ffffff !important;
+    }
+
+    /* ===== BOUTON BURGER ===== */
+
+    /* Burger reste bleu */
+    .burger,
+    .menu-toggle,
+    .hamburger {
+        background: transparent !important;
+    }
+
+    .burger span,
+    .menu-toggle span,
+    .hamburger span {
+        background: #003d7a !important;
+    }
+
+    /* Burger ouvert (croix) devient orange */
+    .burger.active span,
+    .menu-toggle.active span,
+    .hamburger.active span {
+        background: #ff6b35 !important;
+    }
+
+    /* ===== BORDURES ET OMBRES ===== */
+
+    /* Menu avec ombre légère */
+    .main-nav,
+    .nav-menu,
+    .mobile-menu {
+        box-shadow: -5px 0 30px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* Bordure gauche du menu */
+    .main-nav,
+    .nav-menu,
+    .mobile-menu {
+        border-left: 1px solid #e0e0e0 !important;
+    }
+
+    /* ===== ANIMATIONS ===== */
+
+    /* Transition slide */
+    .main-nav,
+    .nav-menu,
+    .mobile-menu {
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+
+    /* ===== SCROLL DANS LE MENU ===== */
+
+    /* Si menu trop grand, scroll activé */
+    .main-nav,
+    .nav-menu,
+    .mobile-menu {
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    /* ===== ICÔNES DANS LES LIENS (si présentes) ===== */
+
+    .nav-links a i,
+    .nav-links a svg {
+        color: #ff6b35 !important;
+        margin-right: 10px !important;
+    }
+
+    /* ===== Z-INDEX ===== */
+
+    .main-nav,
+    .nav-menu,
+    .mobile-menu {
+        z-index: 9999 !important;
+    }
+
+    .burger,
+    .menu-toggle,
+    .hamburger {
+        z-index: 10000 !important;
+    }
+}
+
+/* ==========================================
+   CORRECTIONS SUPPLÉMENTAIRES
+========================================== */
+
+@media (max-width: 768px) {
+
+    /* Empêcher le body scroll quand menu ouvert */
+    body.menu-open {
+        overflow: hidden !important;
+        position: fixed !important;
+        width: 100% !important;
+    }
+
+    /* Header reste au-dessus */
+    .main-header {
+        z-index: 10001 !important;
+        background: #ffffff !important;
+    }
+
+    /* Container header blanc */
+    .main-header .container {
+        background: #ffffff !important;
+    }
+}
+
+/* ==========================================
+   DEBUG - Pour vérifier qu'il n'y a plus de gris
+   Décommentez pour tester
+========================================== */
+
+/*
+@media (max-width: 768px) {
+    .main-nav, .nav-menu, .mobile-menu {
+        outline: 3px solid lime !important;
+    }
+    
+    .nav-links {
+        outline: 3px solid blue !important;
+    }
+    
+    .nav-links li {
+        outline: 3px solid red !important;
+    }
+}
+*/
