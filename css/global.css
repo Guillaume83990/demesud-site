@@ -546,3 +546,12 @@ button {
     animation: none !important;
     transition: none !important;
 }
+
+html,
+body {
+    overflow-x: clip;
+}
+
+body {
+    touch-action: pan-y;
+}
