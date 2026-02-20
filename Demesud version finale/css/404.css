@@ -1,0 +1,198 @@
+/* ==========================================
+   PAGE 404 - STYLES PREMIUM
+========================================== */
+
+.error-404-section {
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+}
+
+.error-404-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Icon animée */
+.error-404-icon {
+    font-size: 8rem;
+    color: var(--color-orange);
+    margin-bottom: 30px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Numéro 404 */
+.error-404-number {
+    font-size: clamp(6rem, 15vw, 10rem);
+    font-weight: 900;
+    color: var(--color-primary);
+    line-height: 1;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Titre */
+.error-404-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--color-primary);
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+/* Description */
+.error-404-description {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--color-text-medium);
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+/* Boutons d'action */
+.error-404-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+}
+
+.btn-404 {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-404-primary {
+    background: var(--color-orange);
+    color: var(--color-white);
+    border: 2px solid var(--color-orange);
+}
+
+.btn-404-primary:hover {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+}
+
+.btn-404-secondary {
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+}
+
+.btn-404-secondary:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+    transform: translateY(-3px);
+}
+
+/* Liens rapides */
+.error-404-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.error-404-link-card {
+    background: var(--color-white);
+    padding: 30px 20px;
+    border-radius: 16px;
+    border: 2px solid var(--color-gray-light);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.error-404-link-card:hover {
+    border-color: var(--color-orange);
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.error-404-link-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--color-orange), #ff8c42);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    font-size: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.error-404-link-card:hover .error-404-link-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.error-404-link-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.error-404-link-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-medium);
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .error-404-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-404 {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .error-404-links {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .error-404-icon {
+        font-size: 5rem;
+    }
+
+    .error-404-links {
+        grid-template-columns: 1fr;
+    }
+}

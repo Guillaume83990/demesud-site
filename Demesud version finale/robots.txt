@@ -1,0 +1,24 @@
+# robots.txt - Démésud
+# Site: https://www.demesud.com
+# Dernière mise à jour: 2026-02-19
+
+# Autoriser tous les robots d'indexation
+User-agent: *
+Allow: /
+
+# Interdire l'accès aux dossiers sensibles
+Disallow: /cgi-bin/
+Disallow: /admin/
+Disallow: /tmp/
+Disallow: /includes/
+
+# Interdire l'indexation des fichiers privés
+Disallow: /*.log$
+Disallow: /*.sql$
+Disallow: /*.zip$
+
+# Sitemap
+Sitemap: https://www.demesud.com/sitemap.xml
+
+# Crawl-delay pour limiter la charge serveur (optionnel)
+# Crawl-delay: 10
