@@ -1,0 +1,43 @@
+<header class="main-header">
+    <div class="container header-flex">
+        <!-- Logo -->
+        <div class="logo">
+            <a href="index.html" aria-label="Retour à l'accueil Démésud">
+                <img src="assets/logo/logo-demesud-transparent.webp" alt="Démésud - Déménagement Saint-Tropez"
+                    width="180" height="60">
+            </a>
+        </div>
+
+        <!-- Navigation principale -->
+        <nav class="main-nav" aria-label="Navigation principale">
+            <ul class="nav-links">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="demenagement.html">Déménagement</a></li>
+                <li><a href="garde-meubles.html">Garde-Meubles</a></li>
+                <li><a href="installation-villas.html">Installation Villas</a></li>
+                <li><a href="apropos.html">À Propos</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Sélecteur de langue -->
+        <div class="lang-switcher" role="navigation" aria-label="Sélecteur de langue">
+            <button class="lang-btn" data-lang="fr" onclick="changeLanguage('fr')" aria-label="Version française"
+                title="Français">
+                <img src="assets/images/drapeau-france.svg" alt="Français" class="flag-icon" width="24" height="24">
+            </button>
+            <button class="lang-btn" data-lang="en" onclick="changeLanguage('en')" aria-label="English version"
+                title="English">
+                <img src="assets/images/drapeau-anglais.svg" alt="English" class="flag-icon" width="24" height="24">
+            </button>
+            <div id="google_translate_element" style="display:none"></div>
+        </div>
+
+        <!-- Menu burger mobile -->
+        <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</header>

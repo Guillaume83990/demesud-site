@@ -1,0 +1,415 @@
+/* ==========================================
+   DÉMÉSUD - FOOTER STYLES
+   Footer professionnel avec texte blanc
+========================================== */
+
+/* ==========================================
+   FOOTER PRINCIPAL
+========================================== */
+
+footer {
+    background: var(--color-white);
+    color: var(--color-primary);
+    padding: 60px 0 0;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(0, 61, 122, 0.1);
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-orange);
+}
+
+/* Tous les textes en bleu */
+footer * {
+    color: var(--color-primary) !important;
+}
+
+/* Les liens en hover orange */
+footer a:hover {
+    color: var(--color-orange) !important;
+}
+
+/* Les icônes en orange */
+footer i {
+    color: var(--color-orange) !important;
+}
+
+/* Les underlines des titres en orange */
+footer h3::after {
+    background: var(--color-orange) !important;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-orange);
+}
+
+/* ==========================================
+   FOOTER GRID
+========================================== */
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+/* ==========================================
+   FOOTER COLUMN
+========================================== */
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-column h3 {
+    color: var(--color-primary) !important;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.footer-column h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: var(--color-orange);
+    border-radius: 2px;
+}
+
+/* ==========================================
+   FOOTER LOGO & DESCRIPTION
+========================================== */
+
+.footer-logo {
+    max-width: 180px;
+    margin-bottom: 20px;
+}
+
+.footer-description {
+    color: var(--color-primary) !important;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
+/* ==========================================
+   FOOTER SOCIAL
+========================================== */
+
+.footer-social {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--color-primary-light);
+    border-radius: 50%;
+    color: var(--color-primary) !important;
+    transition: var(--transition-normal);
+    font-size: 1.1rem;
+}
+
+.social-link:hover {
+    background: var(--color-primary) !important;
+    transform: translateY(-3px);
+    color: var(--color-white) !important;
+}
+
+/* ==========================================
+   FOOTER LINKS
+========================================== */
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 12px;
+}
+
+.footer-links a {
+    color: var(--color-white);
+    text-decoration: none;
+    transition: var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.footer-links a:hover {
+    color: var(--color-orange);
+    padding-left: 5px;
+}
+
+.footer-links a i {
+    font-size: 0.8rem;
+    color: var(--color-orange);
+}
+
+/* ==========================================
+   FOOTER CONTACT
+========================================== */
+
+.footer-contact {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-contact li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 15px;
+    color: var(--color-primary) !important;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.footer-contact i {
+    color: var(--color-orange) !important;
+    font-size: 1.1rem;
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.footer-contact a {
+    color: var(--color-primary) !important;
+    transition: var(--transition-fast);
+    text-decoration: none;
+}
+
+.footer-contact a:hover {
+    color: var(--color-orange) !important;
+}
+
+/* ==========================================
+   FOOTER HORAIRES
+========================================== */
+
+.footer-hours {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-hours li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 61, 122, 0.15);
+    color: var(--color-primary) !important;
+    font-size: 0.9rem;
+}
+
+.footer-hours li:last-child {
+    border-bottom: none;
+}
+
+.footer-hours .day {
+    font-weight: 500;
+    color: var(--color-primary) !important;
+}
+
+.footer-hours .time {
+    color: var(--color-text-medium) !important;
+}
+
+/* ==========================================
+   FOOTER BOTTOM
+========================================== */
+
+.footer-bottom {
+    border-top: 1px solid rgba(0, 61, 122, 0.15);
+    padding: 25px 0;
+    margin-top: 40px;
+}
+
+.footer-bottom-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Forcer le crédit à droite */
+.footer-credit {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-text-medium);
+    font-size: 0.85rem;
+    margin-left: auto !important;
+    order: 999;
+}
+
+/* Copyright à gauche */
+.footer-copyright {
+    color: var(--color-primary) !important;
+    font-size: 0.9rem;
+    order: 1;
+}
+
+.footer-copyright a {
+    color: var(--color-orange) !important;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+
+
+/* ==========================================
+   FOOTER LEGAL LINKS
+========================================== */
+
+.footer-legal {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-legal a {
+    color: var(--color-primary) !important;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+.footer-legal a:hover {
+    color: var(--color-orange) !important;
+}
+
+/* ==========================================
+   FOOTER CREDIT
+========================================== */
+
+.footer-credit a {
+    color: var(--color-orange);
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+.footer-credit a:hover {
+    text-decoration: underline;
+    color: var(--color-primary);
+}
+
+.footer-credit i {
+    color: var(--color-orange);
+}
+
+/* ==========================================
+   RESPONSIVE - TABLETTE
+========================================== */
+
+@media (max-width: 1024px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 35px;
+    }
+}
+
+/* ==========================================
+   RESPONSIVE - MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+    footer {
+        padding: 40px 0 0;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer-column h3 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+
+    .footer-bottom-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-legal {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    footer {
+        padding: 30px 0 0;
+    }
+
+    .footer-logo {
+        max-width: 150px;
+    }
+
+    .footer-bottom {
+        padding: 20px 0;
+    }
+
+    .footer-copyright {
+        font-size: 0.85rem;
+    }
+}
+
+/* ==========================================
+   PRINT
+========================================== */
+
+@media print {
+    footer {
+        background: white;
+        color: black;
+        border-top: 2px solid black;
+    }
+
+    .footer-social,
+    .footer-legal,
+    .footer-credit {
+        display: none;
+    }
+}
