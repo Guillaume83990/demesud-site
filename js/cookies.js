@@ -1,150 +1,137 @@
 /* ==========================================
-   GESTION COOKIES RGPD - VERSION FINALE
-   Sauvegarde du choix + Fonctionne parfaitement
+   COOKIES - VERSION GARANTIE 100%
+   Utilise des vrais cookies HTTP
 ========================================== */
 
 'use strict';
 
-console.log('🍪 Cookies script chargé');
+console.log('🍪 DEMESUD - Version Cookie HTTP');
 
-// Variable globale pour éviter les doubles exécutions
-let cookiesInitialized = false;
+// Fonctions pour gérer les cookies HTTP
+function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    console.log('✅ Cookie créé:', name, '=', value);
+}
 
-// Initialisation au chargement complet de la page
-window.addEventListener('load', function () {
-    if (cookiesInitialized) return;
-    cookiesInitialized = true;
+function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) {
+            const value = c.substring(nameEQ.length, c.length);
+            console.log('📖 Cookie trouvé:', name, '=', value);
+            return value;
+        }
+    }
+    console.log('❌ Cookie non trouvé:', name);
+    return null;
+}
 
-    console.log('🍪 Initialisation cookies...');
+function deleteCookie(name) {
+    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    console.log('🗑️ Cookie supprimé:', name);
+}
 
+// Nom du cookie
+const COOKIE_NAME = 'demesud_consent';
+
+// Afficher la bannière
+function showBanner() {
     const banner = document.getElementById('cookiesBanner');
-    if (!banner) {
-        console.warn('⚠️ Bannière cookies non trouvée');
-        return;
-    }
-
-    // Vérifier le consentement
-    let cookiesConsent = null;
-    try {
-        cookiesConsent = localStorage.getItem('cookiesConsent');
-    } catch (e) {
-        console.log('localStorage non accessible');
-    }
-
-    if (cookiesConsent === null) {
-        // AUCUN CHOIX = AFFICHER LA BANNIÈRE
-        console.log('→ Pas de consentement enregistré');
-        console.log('📢 Bannière visible et en attente de votre choix');
+    if (banner) {
         banner.style.display = 'block';
         banner.style.opacity = '1';
+        banner.style.visibility = 'visible';
         banner.style.transform = 'translateY(0)';
+        console.log('📢 BANNIÈRE AFFICHÉE');
     } else {
-        // CHOIX DÉJÀ FAIT = CACHER
-        console.log('→ Consentement déjà enregistré:', cookiesConsent);
-        console.log('✓ Bannière masquée');
-        banner.style.display = 'none';
+        console.error('❌ Bannière non trouvée dans le DOM !');
+    }
+}
 
-        // Activer Analytics si accepté
-        if (cookiesConsent === 'accepted') {
-            enableAnalytics();
+// Cacher la bannière
+function hideBanner() {
+    const banner = document.getElementById('cookiesBanner');
+    if (banner) {
+        banner.style.transform = 'translateY(-100%)';
+        banner.style.opacity = '0';
+        setTimeout(() => {
+            banner.style.display = 'none';
+            banner.style.visibility = 'hidden';
+        }, 500);
+        console.log('✅ BANNIÈRE CACHÉE');
+    }
+}
+
+// Initialisation
+window.addEventListener('load', function () {
+    console.log('🔍 Vérification du consentement...');
+
+    const consent = getCookie(COOKIE_NAME);
+
+    if (consent) {
+        console.log('→ Consentement trouvé:', consent);
+        console.log('→ Bannière reste cachée');
+
+        const banner = document.getElementById('cookiesBanner');
+        if (banner) {
+            banner.style.display = 'none';
+            banner.style.visibility = 'hidden';
         }
+    } else {
+        console.log('→ Pas de consentement');
+        console.log('→ Affichage de la bannière');
+        showBanner();
     }
 });
 
-// Fonction ACCEPTER
+// ACCEPTER
 window.acceptAllCookies = function () {
-    console.log('✅ COOKIES ACCEPTÉS');
-
-    const banner = document.getElementById('cookiesBanner');
-    if (banner) {
-        // Animation de sortie
-        banner.style.transform = 'translateY(-100%)';
-        banner.style.opacity = '0';
-
-        setTimeout(function () {
-            banner.style.display = 'none';
-        }, 500);
-    }
-
-    // Sauvegarder le choix
-    try {
-        localStorage.setItem('cookiesConsent', 'accepted');
-        console.log('💾 Choix sauvegardé: accepted');
-    } catch (e) {
-        console.error('Erreur sauvegarde:', e);
-    }
-
-    // Activer Analytics
-    enableAnalytics();
+    console.log('════════════════════════════════');
+    console.log('✅ ACCEPTER CLIQUÉ');
+    setCookie(COOKIE_NAME, 'accepted', 365);
+    hideBanner();
+    console.log('════════════════════════════════');
 };
 
-// Fonction REFUSER
+// REFUSER
 window.refuseAllCookies = function () {
-    console.log('❌ COOKIES REFUSÉS');
-
-    const banner = document.getElementById('cookiesBanner');
-    if (banner) {
-        // Animation de sortie
-        banner.style.transform = 'translateY(-100%)';
-        banner.style.opacity = '0';
-
-        setTimeout(function () {
-            banner.style.display = 'none';
-        }, 500);
-    }
-
-    // Sauvegarder le choix
-    try {
-        localStorage.setItem('cookiesConsent', 'refused');
-        console.log('💾 Choix sauvegardé: refused');
-    } catch (e) {
-        console.error('Erreur sauvegarde:', e);
-    }
-
-    // Désactiver Analytics
-    disableAnalytics();
+    console.log('════════════════════════════════');
+    console.log('❌ REFUSER CLIQUÉ');
+    setCookie(COOKIE_NAME, 'refused', 365);
+    hideBanner();
+    console.log('════════════════════════════════');
 };
 
-// Activer Google Analytics (à personnaliser)
-function enableAnalytics() {
-    console.log('📊 Analytics activé');
-    // Ajoutez ici votre code Google Analytics
-    // Exemple:
-    // window.dataLayer = window.dataLayer || [];
-    // function gtag(){dataLayer.push(arguments);}
-    // gtag('js', new Date());
-    // gtag('config', 'GA_MEASUREMENT_ID');
-}
-
-// Désactiver Analytics
-function disableAnalytics() {
-    console.log('📊 Analytics désactivé');
-    // Ajoutez ici le code pour désactiver GA si nécessaire
-}
-
-// FONCTION DE DEBUG - Réinitialiser le consentement
-window.resetCookiesConsent = function () {
-    console.log('🔄 RÉINITIALISATION DU CONSENTEMENT');
-    try {
-        localStorage.removeItem('cookiesConsent');
-        console.log('✓ Consentement supprimé');
-    } catch (e) {
-        console.error('Erreur:', e);
-    }
-    location.reload();
+// DEBUG - Voir le statut
+window.voirCookies = function () {
+    console.log('════════════════════════════════');
+    console.log('📊 TOUS LES COOKIES:');
+    console.log(document.cookie);
+    console.log('════════════════════════════════');
+    console.log('📊 Cookie Demesud:', getCookie(COOKIE_NAME) || 'Aucun');
+    console.log('════════════════════════════════');
 };
 
-// FONCTION DE DEBUG - Voir le statut actuel
-window.checkCookiesStatus = function () {
+// DEBUG - Réinitialiser
+window.resetTout = function () {
+    console.log('🔄 RESET COMPLET');
+    deleteCookie(COOKIE_NAME);
+
+    // Nettoyer aussi localStorage au cas où
     try {
-        const status = localStorage.getItem('cookiesConsent');
-        console.log('📊 Statut actuel:', status || 'Aucun choix');
-        return status;
-    } catch (e) {
-        console.error('Erreur:', e);
-        return null;
-    }
+        localStorage.clear();
+        console.log('✅ localStorage vidé');
+    } catch (e) { }
+
+    console.log('✅ Rechargement...');
+    setTimeout(() => location.reload(), 500);
 };
 
-console.log('✅ Fonctions cookies prêtes');
-console.log('💡 Pour tester: tapez resetCookiesConsent() dans la console');
+console.log('✅ Script prêt');
+console.log('💡 Tapez: voirCookies() ou resetTout()');
