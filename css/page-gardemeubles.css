@@ -1,21 +1,21 @@
 /* ==========================================
-   PAGE GARDE-MEUBLES - STYLES PROFESSIONNELS
+   PAGE GARDE-MEUBLES - STYLES SPÉCIFIQUES COMPLETS
 ========================================== */
 
 /* ==========================================
-   HERO PAGE
+   HERO SECTION
 ========================================== */
 
 .page-hero {
     position: relative;
-    min-height: 500px;
+    min-height: 70vh;
     display: flex;
     align-items: center;
     overflow: hidden;
-    background: var(--color-primary);
 }
 
-.hero-bg {
+/* Background avec parallaxe */
+.page-hero .hero-bg {
     position: absolute;
     top: 0;
     left: 0;
@@ -23,31 +23,33 @@
     height: 100%;
     background: url('../assets/images/hero-garde-meubles.webp') center/cover no-repeat;
     background-attachment: fixed;
-    background-position: center 40%;
 }
 
-.hero-gradient {
+/* Dégradé bleu IDENTIQUE à index */
+.page-hero .hero-gradient {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, rgba(0, 61, 122, 0.80) 0%, rgba(0, 81, 168, 0.70) 100%);
+    background: linear-gradient(135deg, rgba(0, 61, 122, 0.75) 0%, rgba(0, 81, 168, 0.65) 100%);
 }
 
-.hero-wrapper {
+.page-hero .hero-wrapper {
     position: relative;
     z-index: 10;
     padding: 120px 20px 80px;
+    text-align: center;
 }
 
-/* Breadcrumb */
 .breadcrumb {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     font-size: 0.9rem;
     margin-bottom: 30px;
+    flex-wrap: wrap;
 }
 
 .breadcrumb a {
@@ -64,27 +66,30 @@
     color: rgba(255, 255, 255, 0.5);
 }
 
-/* Titres */
 .page-title {
-    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-size: clamp(2rem, 6vw, 4.5rem);
     font-weight: 700;
     color: var(--color-white);
     margin-bottom: 20px;
+    line-height: 1.1;
 }
 
 .page-subtitle {
-    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-size: clamp(1rem, 2.5vw, 1.6rem);
     color: rgba(255, 255, 255, 0.9);
     font-weight: 400;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.5;
 }
 
 /* ==========================================
-   INTRODUCTION
+   INTRODUCTION SECTION
 ========================================== */
 
 .intro-section {
     padding: var(--spacing-xl) 0;
-    background: var(--color-white);
+    background: linear-gradient(135deg, #FDFBF7 0%, var(--color-cream) 100%);
 }
 
 .intro-content {
@@ -94,28 +99,25 @@
 }
 
 .intro-content h2 {
-    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
     color: var(--color-primary);
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     font-weight: 700;
-}
-
-.orange-bar {
-    width: 80px;
-    height: 4px;
-    background: var(--gradient-orange);
-    margin: 0 auto 30px;
-    border-radius: 2px;
+    line-height: 1.2;
 }
 
 .intro-text {
-    font-size: 1.15rem;
-    line-height: 1.8;
+    font-size: 1.2rem;
+    line-height: 1.9;
     color: var(--color-text-medium);
     margin-bottom: 50px;
+    font-weight: 400;
 }
 
-/* Stats boxes */
+/* ==========================================
+   INTRODUCTION STATS
+========================================== */
+
 .intro-stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -154,40 +156,6 @@
     font-size: 1rem;
     color: var(--color-text-medium);
     font-weight: 600;
-}
-
-/* ==========================================
-   SECTION HEADERS (réutilisable)
-========================================== */
-
-.section-head {
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.section-label {
-    display: inline-block;
-    padding: 8px 20px;
-    background: var(--color-orange-light);
-    color: var(--color-orange);
-    border-radius: 25px;
-    font-weight: 600;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-    margin-bottom: 20px;
-}
-
-.section-title {
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    color: var(--color-primary);
-    font-weight: 700;
-    margin-bottom: 18px;
-}
-
-.section-desc {
-    font-size: 1.15rem;
-    color: var(--color-text-medium);
 }
 
 /* ==========================================
@@ -311,7 +279,7 @@
 }
 
 /* ==========================================
-   SOLUTIONS
+   SOLUTIONS SECTION
 ========================================== */
 
 .solutions-section {
@@ -392,7 +360,7 @@
 }
 
 /* ==========================================
-   SÉCURITÉ
+   SÉCURITÉ SECTION
 ========================================== */
 
 .security-section {
@@ -455,102 +423,7 @@
 }
 
 /* ==========================================
-   CTA FINAL
-========================================== */
-
-.cta-section {
-    padding: var(--spacing-xl) 0;
-    background: var(--gradient-blue);
-    position: relative;
-    overflow: hidden;
-}
-
-.cta-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 30% 50%, rgba(255, 107, 53, 0.15) 0%, transparent 70%);
-}
-
-.cta-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    color: var(--color-white);
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.cta-content h2 {
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
-    color: var(--color-white);
-    margin-bottom: 20px;
-    font-weight: 700;
-}
-
-.cta-content p {
-    font-size: 1.25rem;
-    color: var(--color-white);
-    margin-bottom: 45px;
-    font-weight: 400;
-}
-
-.cta-buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.btn-cta-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 20px 45px;
-    background: var(--gradient-orange);
-    color: var(--color-white);
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.4);
-}
-
-.btn-cta-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 50px rgba(255, 107, 53, 0.6);
-    background: var(--color-white);
-    color: var(--color-primary);
-}
-
-.btn-cta-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 20px 45px;
-    background: transparent;
-    border: 2px solid var(--color-white);
-    color: var(--color-white);
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.btn-cta-secondary:hover {
-    background: var(--color-orange);
-    border-color: var(--color-orange);
-    color: var(--color-white);
-    transform: translateY(-3px);
-}
-
-/* ==========================================
-   RESPONSIVE - TABLETTE
+   RESPONSIVE TABLETTE
 ========================================== */
 
 @media (max-width: 1024px) {
@@ -568,15 +441,65 @@
 }
 
 /* ==========================================
-   RESPONSIVE - MOBILE
+   RESPONSIVE MOBILE
 ========================================== */
 
 @media (max-width: 768px) {
+
+    /* HERO MOBILE - Comme Index */
+    .page-hero {
+        min-height: auto;
+        height: auto;
+        display: block;
+    }
+
+    .page-hero .hero-bg {
+        position: relative;
+        height: 400px;
+        background-attachment: scroll;
+        background-position: center 40%;
+    }
+
+    .page-hero .hero-gradient {
+        background: linear-gradient(to bottom,
+                rgba(0, 61, 122, 0.75) 0%,
+                rgba(0, 61, 122, 0.85) 50%,
+                rgba(0, 61, 122, 0.95) 100%);
+    }
+
+    .page-hero .hero-wrapper {
+        position: static;
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .breadcrumb {
+        font-size: 0.85rem;
+        margin-bottom: 20px;
+    }
+
+    .page-title {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        margin-bottom: 18px;
+    }
+
+    .page-subtitle {
+        font-size: 1.15rem;
+        margin-bottom: 20px;
+    }
+
+    /* Stats */
     .intro-stats {
         grid-template-columns: 1fr;
         gap: 20px;
     }
 
+    .stat-box {
+        padding: 25px 20px;
+    }
+
+    /* Sites */
     .sites-grid {
         grid-template-columns: 1fr;
     }
@@ -585,10 +508,12 @@
         height: 240px;
     }
 
+    /* Solutions */
     .solutions-grid {
         grid-template-columns: 1fr;
     }
 
+    /* Sécurité */
     .security-grid {
         grid-template-columns: 1fr;
     }
@@ -596,29 +521,35 @@
     .security-image {
         height: 180px;
     }
-
-    .cta-buttons {
-        flex-direction: column;
-    }
-
-    .btn-cta-primary,
-    .btn-cta-secondary {
-        width: 100%;
-        justify-content: center;
-    }
 }
 
+/* ==========================================
+   RESPONSIVE PETIT MOBILE
+========================================== */
+
 @media (max-width: 480px) {
+    .page-hero .hero-bg {
+        height: 350px;
+    }
+
+    .page-hero .hero-wrapper {
+        padding: 30px 15px;
+    }
+
+    .page-title {
+        font-size: 1.9rem;
+    }
+
+    .page-subtitle {
+        font-size: 1.05rem;
+    }
+
     .site-visual {
         height: 220px;
     }
 
     .security-image {
         height: 160px;
-    }
-
-    .stat-box {
-        padding: 25px 20px;
     }
 
     .security-card {
@@ -635,3 +566,5 @@
         font-size: 0.9rem;
     }
 }
+
+/* FIN PAGE-GARDEMEUBLES.CSS */

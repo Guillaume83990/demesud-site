@@ -1,20 +1,19 @@
 /* ==========================================
-   DEMESUD - INDEX PAGE
-   Version propre sans blocage scroll
+   PAGE INDEX - JAVASCRIPT
+   Carousel avis + Stats animés
 ========================================== */
 
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('🌟 Démésud - Initialisation...');
+    console.log('🌟 Page Index - Initialisation...');
 
-    // Initialiser seulement les fonctions essentielles
     initCarousel();
     initSmoothScroll();
     initButtonAnimations();
     initStatsCounter();
 
-    console.log('✅ Démésud - Chargé avec succès');
+    console.log('✅ Page Index - Chargée avec succès');
 });
 
 // ==========================================
@@ -204,43 +203,72 @@ function initStatsCounter() {
     const stats = document.querySelectorAll('.stat-number');
     let hasAnimated = false;
 
+    if (stats.length === 0) {
+        console.log('⚠️ Aucun .stat-number trouvé');
+        return;
+    }
+
+    console.log(`📊 ${stats.length} stats trouvés`);
+
     const animateNumber = (element) => {
         const target = parseInt(element.getAttribute('data-target'));
-        const duration = 2000; // 2 secondes
-        const increment = target / (duration / 16); // 60fps
-        let current = 0;
 
-        const updateNumber = () => {
-            current += increment;
-            if (current < target) {
-                element.textContent = Math.floor(current);
-                requestAnimationFrame(updateNumber);
+        if (!target || isNaN(target)) {
+            console.warn('⚠️ Pas de data-target valide pour:', element);
+            return;
+        }
+
+        console.log(`✅ Animation stat: ${target}`);
+
+        const duration = 2000; // 2 secondes
+        const frameRate = 1000 / 60; // 60 FPS
+        const totalFrames = Math.round(duration / frameRate);
+        const increment = target / totalFrames;
+
+        let currentFrame = 0;
+
+        element.textContent = '0';
+
+        const animate = () => {
+            currentFrame++;
+            const currentValue = Math.min(Math.round(increment * currentFrame), target);
+            element.textContent = currentValue;
+
+            if (currentFrame < totalFrames) {
+                requestAnimationFrame(animate);
             } else {
                 element.textContent = target;
             }
         };
 
-        updateNumber();
+        animate();
     };
 
     const checkScroll = () => {
         if (hasAnimated) return;
 
         const statsSection = document.querySelector('.stats-luxury');
-        if (!statsSection) return;
+        if (!statsSection) {
+            console.log('⚠️ Section .stats-luxury non trouvée');
+            return;
+        }
 
         const rect = statsSection.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight * 0.8;
+        const windowHeight = window.innerHeight;
+        const isVisible = rect.top < windowHeight && rect.bottom > 0;
 
         if (isVisible) {
             hasAnimated = true;
-            stats.forEach(stat => animateNumber(stat));
+            console.log('🎬 Démarrage animation stats !');
+            stats.forEach(stat => {
+                setTimeout(() => animateNumber(stat), 100);
+            });
             window.removeEventListener('scroll', checkScroll);
         }
     };
 
-    // Vérifier au chargement
-    checkScroll();
+    // Vérifier au chargement de la page
+    setTimeout(checkScroll, 500);
 
     // Vérifier au scroll
     window.addEventListener('scroll', checkScroll);
@@ -272,7 +300,7 @@ function initButtonAnimations() {
 }
 
 // ==========================================
-// CAROUSEL RESPONSIVE MOBILE
+// RESPONSIVE MOBILE
 // ==========================================
 
 function handleCarouselResponsive() {
@@ -310,4 +338,4 @@ function debounce(func, wait) {
     };
 }
 
-console.log('📊 Stats: Services:', document.querySelectorAll('.service-card').length);
+console.log('📊 Index: Services:', document.querySelectorAll('.service-card').length);

@@ -1,18 +1,17 @@
 /* ==========================================
-   PAGE INSTALLATION VILLAS
-   Version propre sans blocage scroll
+   PAGE DÉMÉNAGEMENT - JAVASCRIPT
+   Smooth scroll + Animations boutons
 ========================================== */
 
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('🏠 Page Installation Villas - Initialisation...');
+    console.log('🚛 Page Déménagement - Initialisation...');
 
     initSmoothScroll();
     initButtonAnimations();
-    initFAQ();
 
-    console.log('✅ Page Installation Villas - Chargée avec succès');
+    console.log('✅ Page Déménagement - Chargée avec succès');
 });
 
 // ==========================================
@@ -45,7 +44,7 @@ function initSmoothScroll() {
 // ==========================================
 
 function initButtonAnimations() {
-    const buttons = document.querySelectorAll('.btn-cta-primary, .btn-cta-secondary, .btn-service');
+    const buttons = document.querySelectorAll('.btn-cta-primary, .btn-cta-secondary, .btn-card');
 
     buttons.forEach(button => {
         button.addEventListener('mouseenter', function () {
@@ -65,29 +64,4 @@ function initButtonAnimations() {
     });
 }
 
-// ==========================================
-// FAQ ACCORDION
-// ==========================================
-
-function initFAQ() {
-    const faqQuestions = document.querySelectorAll('.faq-question');
-
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', function () {
-            const faqItem = this.closest('.faq-item');
-            const isActive = faqItem.classList.contains('active');
-
-            // Fermer toutes les FAQ
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('active');
-            });
-
-            // Ouvrir celle cliquée si elle n'était pas déjà ouverte
-            if (!isActive) {
-                faqItem.classList.add('active');
-            }
-        });
-    });
-}
-
-console.log('📊 Stats: Services:', document.querySelectorAll('.service-card').length);
+console.log('📊 Stats: Services:', document.querySelectorAll('.service-detail-card').length);

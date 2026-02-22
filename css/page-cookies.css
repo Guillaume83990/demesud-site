@@ -1,10 +1,10 @@
 /* ==========================================
-   BANNIÈRE & MODAL COOKIES - STYLES
-   Design moderne et RGPD compliant
+   PAGE COOKIES - BANNIÈRE & MODAL
+   Styles pour la gestion des cookies RGPD
 ========================================== */
 
 /* ==========================================
-   BANNIÈRE COOKIES (bas de page)
+   BANNIÈRE COOKIES (fixée en bas)
 ========================================== */
 
 .cookies-banner {
@@ -71,7 +71,6 @@
     color: #ff8c42;
 }
 
-/* Boutons de la bannière */
 .cookies-actions {
     display: flex;
     gap: 15px;
@@ -115,37 +114,7 @@
 }
 
 /* ==========================================
-   RESPONSIVE - BANNIÈRE
-========================================== */
-
-@media (max-width: 768px) {
-    .cookies-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .cookies-text {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .cookies-text i {
-        font-size: 2rem;
-    }
-
-    .cookies-actions {
-        width: 100%;
-        flex-direction: column;
-    }
-
-    .btn-cookies {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-/* ==========================================
-   MODAL COOKIES (gestion préférences)
+   MODAL PRÉFÉRENCES COOKIES
 ========================================== */
 
 .cookies-modal {
@@ -166,6 +135,16 @@
     display: flex;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
 .cookies-modal-content {
     background: var(--color-white);
     width: 90%;
@@ -175,6 +154,18 @@
     overflow: hidden;
     animation: slideUp 0.4s ease;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .cookies-modal-header {
@@ -192,6 +183,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    color: var(--color-white);
 }
 
 .cookies-modal-close {
@@ -226,7 +218,6 @@
     line-height: 1.6;
 }
 
-/* Catégories de cookies */
 .cookie-category {
     margin-bottom: 20px;
     padding: 20px;
@@ -277,7 +268,7 @@
     margin: 0;
 }
 
-/* Toggle switch */
+/* Toggle Switch */
 .cookie-toggle {
     position: relative;
     display: inline-block;
@@ -328,7 +319,6 @@
     cursor: not-allowed;
 }
 
-/* Footer modal */
 .cookies-modal-footer {
     padding: 20px 30px;
     background: var(--color-cream);
@@ -381,36 +371,34 @@
 }
 
 /* ==========================================
-   ANIMATIONS
-========================================== */
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* ==========================================
-   RESPONSIVE - MODAL
+   RESPONSIVE MOBILE
 ========================================== */
 
 @media (max-width: 768px) {
+    .cookies-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cookies-text {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .cookies-text i {
+        font-size: 2rem;
+    }
+
+    .cookies-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .btn-cookies {
+        width: 100%;
+        justify-content: center;
+    }
+
     .cookies-modal-content {
         width: 95%;
         max-height: 95vh;
@@ -434,3 +422,5 @@
         justify-content: center;
     }
 }
+
+/* FIN PAGE-COOKIES.CSS */

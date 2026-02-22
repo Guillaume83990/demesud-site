@@ -1,6 +1,6 @@
 /* ==========================================
-   PAGE À PROPOS
-   Version propre sans blocage scroll
+   PAGE À PROPOS - JAVASCRIPT
+   Stats counter animé
 ========================================== */
 
 'use strict';
@@ -48,45 +48,71 @@ function initStatsCounter() {
     const stats = document.querySelectorAll('.stat-value');
     let hasAnimated = false;
 
-    const animateNumber = (element) => {
-        const target = parseInt(element.getAttribute('data-target'));
-        const duration = 2000; // 2 secondes
-        const increment = target / (duration / 16); // 60fps
-        let current = 0;
+    if (stats.length === 0) {
+        console.log('⚠️ Aucun .stat-value trouvé');
+        return;
+    }
 
-        const updateNumber = () => {
-            current += increment;
-            if (current < target) {
-                element.textContent = Math.floor(current);
-                requestAnimationFrame(updateNumber);
+    console.log(`📊 ${stats.length} stats trouvés`);
+
+    const animateValue = (element) => {
+        const target = parseInt(element.getAttribute('data-target'));
+
+        if (!target || isNaN(target)) {
+            console.warn('⚠️ Pas de data-target valide pour:', element);
+            return;
+        }
+
+        console.log(`✅ Animation stat: ${target}`);
+
+        const duration = 2000;
+        const frameRate = 1000 / 60;
+        const totalFrames = Math.round(duration / frameRate);
+        const increment = target / totalFrames;
+
+        let currentFrame = 0;
+
+        element.textContent = '0';
+
+        const animate = () => {
+            currentFrame++;
+            const currentValue = Math.min(Math.round(increment * currentFrame), target);
+            element.textContent = currentValue;
+
+            if (currentFrame < totalFrames) {
+                requestAnimationFrame(animate);
             } else {
                 element.textContent = target;
             }
         };
 
-        updateNumber();
+        animate();
     };
 
     const checkScroll = () => {
         if (hasAnimated) return;
 
         const statsSection = document.querySelector('.stats-section');
-        if (!statsSection) return;
+        if (!statsSection) {
+            console.log('⚠️ Section .stats-section non trouvée');
+            return;
+        }
 
         const rect = statsSection.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight * 0.8;
+        const windowHeight = window.innerHeight;
+        const isVisible = rect.top < windowHeight && rect.bottom > 0;
 
         if (isVisible) {
             hasAnimated = true;
-            stats.forEach(stat => animateNumber(stat));
+            console.log('🎬 Démarrage animation stats !');
+            stats.forEach(stat => {
+                setTimeout(() => animateValue(stat), 100);
+            });
             window.removeEventListener('scroll', checkScroll);
         }
     };
 
-    // Vérifier au chargement
-    checkScroll();
-
-    // Vérifier au scroll
+    setTimeout(checkScroll, 500);
     window.addEventListener('scroll', checkScroll);
 }
 

@@ -1,17 +1,18 @@
 /* ==========================================
-   PAGE DÉMÉNAGEMENT
-   Version propre sans blocage scroll
+   PAGE INSTALLATION VILLAS - JAVASCRIPT
+   FAQ accordion + Animations
 ========================================== */
 
 'use strict';
 
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('🚛 Page Déménagement - Initialisation...');
+    console.log('🏠 Page Installation Villas - Initialisation...');
 
     initSmoothScroll();
     initButtonAnimations();
+    initFAQ();
 
-    console.log('✅ Page Déménagement - Chargée avec succès');
+    console.log('✅ Page Installation Villas - Chargée avec succès');
 });
 
 // ==========================================
@@ -44,7 +45,7 @@ function initSmoothScroll() {
 // ==========================================
 
 function initButtonAnimations() {
-    const buttons = document.querySelectorAll('.btn-cta-primary, .btn-cta-secondary, .btn-card');
+    const buttons = document.querySelectorAll('.btn-cta-primary, .btn-cta-secondary, .btn-service');
 
     buttons.forEach(button => {
         button.addEventListener('mouseenter', function () {
@@ -64,4 +65,33 @@ function initButtonAnimations() {
     });
 }
 
-console.log('📊 Stats: Services:', document.querySelectorAll('.service-detail-card').length);
+// ==========================================
+// FAQ ACCORDION
+// ==========================================
+
+function initFAQ() {
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        if (!question) return;
+
+        question.addEventListener('click', function () {
+            const isActive = item.classList.contains('active');
+
+            // Fermer toutes les FAQ
+            faqItems.forEach(otherItem => {
+                otherItem.classList.remove('active');
+            });
+
+            // Ouvrir celle cliquée si elle n'était pas déjà ouverte
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+
+    console.log('📊 FAQ items:', faqItems.length);
+}
+
+console.log('📊 Stats: Services:', document.querySelectorAll('.service-card').length);

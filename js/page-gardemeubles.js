@@ -1,6 +1,6 @@
 /* ==========================================
-   PAGE GARDE-MEUBLES
-   Version propre sans blocage scroll
+   PAGE GARDE-MEUBLES - JAVASCRIPT
+   Stats counter animé
 ========================================== */
 
 'use strict';
@@ -50,17 +50,13 @@ function initStatsCounter() {
 
     const animateValue = (element) => {
         const text = element.textContent;
-
-        // Si c'est un nombre (comme "2", "100%")
         const match = text.match(/(\d+)/);
-        if (!match) {
-            return; // Pas un nombre, on skip
-        }
+        if (!match) return;
 
         const target = parseInt(match[1]);
-        const suffix = text.replace(/\d+/, ''); // Garde le % ou autre
-        const duration = 2000; // 2 secondes
-        const increment = target / (duration / 16); // 60fps
+        const suffix = text.replace(/\d+/, '');
+        const duration = 2000;
+        const increment = target / (duration / 16);
         let current = 0;
 
         const updateNumber = () => {
@@ -92,10 +88,7 @@ function initStatsCounter() {
         }
     };
 
-    // Vérifier au chargement
     checkScroll();
-
-    // Vérifier au scroll
     window.addEventListener('scroll', checkScroll);
 }
 
