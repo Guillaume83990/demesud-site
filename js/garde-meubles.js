@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     initSmoothScroll();
     initButtonAnimations();
+    initStatsCounter();
 
     console.log('✅ Page Garde-Meubles - Chargée avec succès');
 });
@@ -37,6 +38,65 @@ function initSmoothScroll() {
             });
         });
     });
+}
+
+// ==========================================
+// STATS COUNTER ANIMÉ
+// ==========================================
+
+function initStatsCounter() {
+    const stats = document.querySelectorAll('.stat-value');
+    let hasAnimated = false;
+
+    const animateValue = (element) => {
+        const text = element.textContent;
+
+        // Si c'est un nombre (comme "2", "100%")
+        const match = text.match(/(\d+)/);
+        if (!match) {
+            return; // Pas un nombre, on skip
+        }
+
+        const target = parseInt(match[1]);
+        const suffix = text.replace(/\d+/, ''); // Garde le % ou autre
+        const duration = 2000; // 2 secondes
+        const increment = target / (duration / 16); // 60fps
+        let current = 0;
+
+        const updateNumber = () => {
+            current += increment;
+            if (current < target) {
+                element.textContent = Math.floor(current) + suffix;
+                requestAnimationFrame(updateNumber);
+            } else {
+                element.textContent = target + suffix;
+            }
+        };
+
+        updateNumber();
+    };
+
+    const checkScroll = () => {
+        if (hasAnimated) return;
+
+        const statsSection = document.querySelector('.intro-stats');
+        if (!statsSection) return;
+
+        const rect = statsSection.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight * 0.8;
+
+        if (isVisible) {
+            hasAnimated = true;
+            stats.forEach(stat => animateValue(stat));
+            window.removeEventListener('scroll', checkScroll);
+        }
+    };
+
+    // Vérifier au chargement
+    checkScroll();
+
+    // Vérifier au scroll
+    window.addEventListener('scroll', checkScroll);
 }
 
 // ==========================================

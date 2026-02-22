@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initCarousel();
     initSmoothScroll();
     initButtonAnimations();
+    initStatsCounter();
 
     console.log('✅ Démésud - Chargé avec succès');
 });
@@ -193,6 +194,56 @@ function initSmoothScroll() {
             });
         });
     });
+}
+
+// ==========================================
+// STATS COUNTER ANIMÉ
+// ==========================================
+
+function initStatsCounter() {
+    const stats = document.querySelectorAll('.stat-number');
+    let hasAnimated = false;
+
+    const animateNumber = (element) => {
+        const target = parseInt(element.getAttribute('data-target'));
+        const duration = 2000; // 2 secondes
+        const increment = target / (duration / 16); // 60fps
+        let current = 0;
+
+        const updateNumber = () => {
+            current += increment;
+            if (current < target) {
+                element.textContent = Math.floor(current);
+                requestAnimationFrame(updateNumber);
+            } else {
+                element.textContent = target;
+            }
+        };
+
+        updateNumber();
+    };
+
+    const checkScroll = () => {
+        if (hasAnimated) return;
+
+        const statsSection = document.querySelector('.stats-luxury');
+        if (!statsSection) return;
+
+        const rect = statsSection.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight * 0.8;
+
+        if (isVisible) {
+            hasAnimated = true;
+            stats.forEach(stat => animateNumber(stat));
+            window.removeEventListener('scroll', checkScroll);
+        }
+    };
+
+    // Vérifier au chargement
+    checkScroll();
+
+    // Vérifier au scroll
+    window.addEventListener('scroll', checkScroll);
 }
 
 // ==========================================

@@ -1,6 +1,6 @@
 /* ==========================================
    GESTION COOKIES - JAVASCRIPT
-   Conformité RGPD
+   Conformité RGPD - VERSION CORRIGÉE
 ========================================== */
 
 'use strict';
@@ -26,11 +26,21 @@ function checkCookieConsent() {
     const consent = getCookie('cookie_consent');
 
     if (!consent) {
-        // Pas de consentement, afficher la bannière
-        showCookieBanner();
+        // Pas de consentement, afficher la bannière UNIQUEMENT sur index.html
+        const currentPage = window.location.pathname;
+        const isIndexPage = currentPage === '/' || currentPage === '/index.html' || currentPage.endsWith('/index.html');
+
+        if (isIndexPage) {
+            showCookieBanner();
+        }
     } else {
         // Consentement existant, charger les cookies autorisés
         loadCookies(consent);
+        // IMPORTANT : Cacher la bannière si consentement existe
+        const banner = document.getElementById('cookiesBanner');
+        if (banner) {
+            banner.style.display = 'none';
+        }
     }
 }
 
@@ -41,9 +51,9 @@ function checkCookieConsent() {
 function showCookieBanner() {
     const banner = document.getElementById('cookiesBanner');
     if (banner) {
-        setTimeout(() => {
-            banner.classList.add('show');
-        }, 1000); // Délai d'1 seconde
+        banner.style.display = 'block';
+        // Pas de setTimeout pour éviter qu'elle réapparaisse
+        banner.classList.add('show');
     }
 }
 
@@ -294,11 +304,14 @@ function deleteCookie(name) {
 // FERMER MODAL AU CLIC EXTÉRIEUR
 // ==========================================
 
-document.getElementById('cookiesModal')?.addEventListener('click', function (e) {
-    if (e.target === this) {
-        closeCookieSettings();
-    }
-});
+const cookiesModal = document.getElementById('cookiesModal');
+if (cookiesModal) {
+    cookiesModal.addEventListener('click', function (e) {
+        if (e.target === this) {
+            closeCookieSettings();
+        }
+    });
+}
 
 // ==========================================
 // FERMER MODAL AVEC ESCAPE
