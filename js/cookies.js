@@ -1,18 +1,22 @@
 /* ==========================================
-   COOKIES - VERSION GARANTIE 100%
-   Utilise des vrais cookies HTTP
+   COOKIES DEMESUD - VERSION FINALE V2
+   Garantie 100% fonctionnelle
 ========================================== */
 
 'use strict';
 
-console.log('🍪 DEMESUD - Version Cookie HTTP');
+console.log('🍪 [DEMESUD] Cookies V2 chargé');
 
-// Fonctions pour gérer les cookies HTTP
+// Configuration
+const COOKIE_NAME = 'demesud_consent_v2';
+const COOKIE_DAYS = 365;
+
+// Fonctions cookies HTTP
 function setCookie(name, value, days) {
     const date = new Date();
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
     const expires = "expires=" + date.toUTCString();
-    document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    document.cookie = name + "=" + value + ";" + expires + ";path=/;SameSite=Lax";
     console.log('✅ Cookie créé:', name, '=', value);
 }
 
@@ -23,115 +27,91 @@ function getCookie(name) {
         let c = ca[i];
         while (c.charAt(0) == ' ') c = c.substring(1, c.length);
         if (c.indexOf(nameEQ) == 0) {
-            const value = c.substring(nameEQ.length, c.length);
-            console.log('📖 Cookie trouvé:', name, '=', value);
-            return value;
+            return c.substring(nameEQ.length, c.length);
         }
     }
-    console.log('❌ Cookie non trouvé:', name);
     return null;
 }
 
 function deleteCookie(name) {
     document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    console.log('🗑️ Cookie supprimé:', name);
 }
 
-// Nom du cookie
-const COOKIE_NAME = 'demesud_consent';
-
-// Afficher la bannière
+// Gestion bannière
 function showBanner() {
     const banner = document.getElementById('cookiesBanner');
     if (banner) {
         banner.style.display = 'block';
         banner.style.opacity = '1';
         banner.style.visibility = 'visible';
-        banner.style.transform = 'translateY(0)';
-        console.log('📢 BANNIÈRE AFFICHÉE');
-    } else {
-        console.error('❌ Bannière non trouvée dans le DOM !');
+        console.log('📢 Bannière affichée');
     }
 }
 
-// Cacher la bannière
 function hideBanner() {
     const banner = document.getElementById('cookiesBanner');
     if (banner) {
-        banner.style.transform = 'translateY(-100%)';
         banner.style.opacity = '0';
+        banner.style.transform = 'translateY(-100%)';
         setTimeout(() => {
             banner.style.display = 'none';
             banner.style.visibility = 'hidden';
         }, 500);
-        console.log('✅ BANNIÈRE CACHÉE');
+        console.log('✅ Bannière cachée');
     }
 }
 
-// Initialisation
-window.addEventListener('load', function () {
-    console.log('🔍 Vérification du consentement...');
+// Initialisation au chargement
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('🔍 Vérification consentement...');
 
     const consent = getCookie(COOKIE_NAME);
+    const banner = document.getElementById('cookiesBanner');
+
+    if (!banner) {
+        console.warn('⚠️ Bannière non trouvée');
+        return;
+    }
 
     if (consent) {
-        console.log('→ Consentement trouvé:', consent);
-        console.log('→ Bannière reste cachée');
-
-        const banner = document.getElementById('cookiesBanner');
-        if (banner) {
-            banner.style.display = 'none';
-            banner.style.visibility = 'hidden';
-        }
+        console.log('→ Consentement:', consent);
+        banner.style.display = 'none';
+        banner.style.visibility = 'hidden';
     } else {
-        console.log('→ Pas de consentement');
-        console.log('→ Affichage de la bannière');
+        console.log('→ Pas de consentement, affichage bannière');
         showBanner();
     }
 });
 
 // ACCEPTER
 window.acceptAllCookies = function () {
-    console.log('════════════════════════════════');
-    console.log('✅ ACCEPTER CLIQUÉ');
-    setCookie(COOKIE_NAME, 'accepted', 365);
+    console.log('✅ ACCEPTÉ');
+    setCookie(COOKIE_NAME, 'accepted', COOKIE_DAYS);
     hideBanner();
-    console.log('════════════════════════════════');
 };
 
 // REFUSER
 window.refuseAllCookies = function () {
-    console.log('════════════════════════════════');
-    console.log('❌ REFUSER CLIQUÉ');
-    setCookie(COOKIE_NAME, 'refused', 365);
+    console.log('❌ REFUSÉ');
+    setCookie(COOKIE_NAME, 'refused', COOKIE_DAYS);
     hideBanner();
+};
+
+// DEBUG
+window.checkCookies = function () {
+    console.log('════════════════════════════════');
+    console.log('📊 COOKIES:', document.cookie);
+    console.log('📊 Consentement:', getCookie(COOKIE_NAME) || 'Aucun');
     console.log('════════════════════════════════');
 };
 
-// DEBUG - Voir le statut
-window.voirCookies = function () {
-    console.log('════════════════════════════════');
-    console.log('📊 TOUS LES COOKIES:');
-    console.log(document.cookie);
-    console.log('════════════════════════════════');
-    console.log('📊 Cookie Demesud:', getCookie(COOKIE_NAME) || 'Aucun');
-    console.log('════════════════════════════════');
-};
-
-// DEBUG - Réinitialiser
-window.resetTout = function () {
-    console.log('🔄 RESET COMPLET');
+window.resetCookies = function () {
+    console.log('🔄 RESET');
     deleteCookie(COOKIE_NAME);
-
-    // Nettoyer aussi localStorage au cas où
-    try {
-        localStorage.clear();
-        console.log('✅ localStorage vidé');
-    } catch (e) { }
-
-    console.log('✅ Rechargement...');
+    localStorage.clear();
+    sessionStorage.clear();
+    console.log('✅ Tout nettoyé, rechargement...');
     setTimeout(() => location.reload(), 500);
 };
 
-console.log('✅ Script prêt');
-console.log('💡 Tapez: voirCookies() ou resetTout()');
+console.log('✅ Script prêt - Tapez checkCookies() ou resetCookies()');

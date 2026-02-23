@@ -1,9 +1,6 @@
 /* ==========================================
-   PAGE COOKIES - BANNIÈRE EN HAUT
-========================================== */
-
-/* ==========================================
-   BANNIÈRE COOKIES (fixée en HAUT)
+   COOKIES BANNER - VERSION OPTIMISÉE
+   Minimaliste pour performance maximale
 ========================================== */
 
 .cookies-banner {
@@ -12,21 +9,16 @@
     left: 0;
     right: 0;
     background: linear-gradient(135deg, #003D7A 0%, #0051A8 100%);
-    backdrop-filter: blur(15px);
-    padding: 20px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    padding: 15px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     z-index: 10001;
-    display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
     transform: translateY(0);
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
-    border-bottom: 3px solid var(--color-orange);
-}
-
-.cookies-banner.hide {
-    transform: translateY(-100%);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    border-bottom: 3px solid #FF6B35;
+    display: none;
+    /* Caché par défaut */
     opacity: 0;
+    visibility: hidden;
 }
 
 .cookies-content {
@@ -35,155 +27,125 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 30px;
+    gap: 20px;
 }
 
 .cookies-text {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 15px;
     flex: 1;
 }
 
 .cookies-text i {
-    font-size: 2.5rem;
-    color: var(--color-orange);
+    font-size: 2rem;
+    color: #FF6B35;
     flex-shrink: 0;
-    animation: cookieFloat 3s ease-in-out infinite;
-}
-
-@keyframes cookieFloat {
-
-    0%,
-    100% {
-        transform: translateY(0px) rotate(0deg);
-    }
-
-    50% {
-        transform: translateY(-5px) rotate(10deg);
-    }
 }
 
 .cookies-text-content h3 {
-    font-size: 1.2rem;
-    color: var(--color-white);
+    font-size: 1.1rem;
+    color: #fff;
     margin: 0 0 5px 0;
     font-weight: 700;
 }
 
 .cookies-text-content p {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.95);
     margin: 0;
-    line-height: 1.5;
 }
 
 .cookies-text-content a {
-    color: var(--color-orange);
+    color: #FF6B35;
     text-decoration: none;
     font-weight: 700;
-    border-bottom: 2px solid transparent;
-    transition: all 0.3s ease;
 }
 
 .cookies-text-content a:hover {
-    color: #ff8c42;
-    border-bottom-color: var(--color-orange);
+    text-decoration: underline;
 }
 
 .cookies-actions {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     flex-shrink: 0;
 }
 
 .btn-cookies {
-    padding: 12px 28px;
+    padding: 10px 24px;
     border: none;
     border-radius: 50px;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.2s ease;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    white-space: nowrap;
+}
+
+.btn-cookies:hover {
+    transform: translateY(-2px);
 }
 
 .btn-cookies-refuse {
     background: transparent;
-    color: var(--color-white);
+    color: #fff;
     border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
 .btn-cookies-refuse:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: var(--color-white);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
 }
 
 .btn-cookies-accept {
-    background: var(--gradient-orange);
-    color: var(--color-white);
+    background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%);
+    color: #fff;
     border: 2px solid transparent;
-    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.5);
 }
 
 .btn-cookies-accept:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 30px rgba(255, 107, 53, 0.7);
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
 }
 
-.btn-cookies-accept i {
-    font-size: 1.1rem;
-}
-
-/* ==========================================
-   RESPONSIVE MOBILE
-========================================== */
-
+/* Mobile */
 @media (max-width: 768px) {
     .cookies-banner {
-        padding: 15px;
+        padding: 12px 15px;
     }
 
     .cookies-content {
         flex-direction: column;
-        gap: 20px;
-        text-align: center;
+        gap: 15px;
     }
 
     .cookies-text {
         flex-direction: column;
         text-align: center;
-        gap: 15px;
     }
 
     .cookies-text i {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
     .cookies-text-content h3 {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     .cookies-text-content p {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
     .cookies-actions {
         width: 100%;
-        gap: 10px;
+        flex-direction: column;
     }
 
     .btn-cookies {
-        flex: 1;
+        width: 100%;
         justify-content: center;
         padding: 12px 20px;
-        font-size: 0.95rem;
     }
 }
-
-/* FIN PAGE-COOKIES.CSS */

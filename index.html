@@ -29,8 +29,20 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
 
+    <!--  Précharger Montserrat -->
+    <link rel="preload" href="fonts/Montserrat-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/Montserrat-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/Montserrat-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Précharger Font Awesome -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
 
     <!-- CSS OPTIMISÉ -->
     <link rel="stylesheet" href="css/style.css">
@@ -172,7 +184,7 @@
                     <!-- Service 1 -->
                     <article class="service-card">
                         <div class="service-visual">
-                            <img src="assets/images/demenagement-professionnel.webp" alt="Déménagement professionnel"
+                            <img src="assets/images/image-demenagement.webp" alt="Déménagement professionnel"
                                 width="400" height="300" loading="lazy">
                             <span class="service-tag popular">Populaire</span>
                         </div>
@@ -534,9 +546,9 @@
     </div>
 
     <!-- JavaScript -->
-    <script src="js/main.js"></script>
-    <script src="js/page-index.js"></script>
-    <script src="js/cookies.js"></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/page-index.js" defer></script>
+    <script src="js/cookies.js" defer></script>
 </body>
 
 </html>
